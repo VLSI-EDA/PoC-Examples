@@ -1,4 +1,10 @@
+src/common/my_project.vhdl
+/projects/**/ise/**/*.*
+/projects/**/iseconfig/*.*
+!/projects/**/iseconfig/filter.filter
+__pycache__/
 *.pyc
 *~
 *.o
-__pycache__/
+
+
