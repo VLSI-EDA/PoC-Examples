@@ -90,9 +90,6 @@
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
       <library xil_pn:name="PoC"/>
     </file>
-    <file xil_pn:name="../../../ucf/MetaStability.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
-    </file>
     <file xil_pn:name="../../../src/io/FanControl/KC705/top_FanControl_KC705.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="25"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="18"/>
@@ -107,25 +104,28 @@
       <association xil_pn:name="Implementation" xil_pn:seqID="1"/>
       <library xil_pn:name="PoC"/>
     </file>
-    <file xil_pn:name="../../../ucf/KC705/Clock.SystemClock.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
-    </file>
-    <file xil_pn:name="../../../ucf/KC705/Default.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
-    </file>
-    <file xil_pn:name="../../../ucf/KC705/GPIO.FanControl.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
-    </file>
-    <file xil_pn:name="../../../ucf/KC705/GPIO.LED.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
-    </file>
     <file xil_pn:name="../../../lib/PoC/src/xil/xil_SystemMonitor_Series7.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="50"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="7"/>
       <library xil_pn:name="PoC"/>
     </file>
-    <file xil_pn:name="../../../ucf/xil_Sync.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="75"/>
+    <file xil_pn:name="../../../lib/PoC/ucf/KC705/Clock.SystemClock.ucf" xil_pn:type="FILE_UCF">
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+    </file>
+    <file xil_pn:name="../../../lib/PoC/ucf/KC705/Default.ucf" xil_pn:type="FILE_UCF">
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+    </file>
+    <file xil_pn:name="../../../lib/PoC/ucf/KC705/GPIO.FanControl.ucf" xil_pn:type="FILE_UCF">
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+    </file>
+    <file xil_pn:name="../../../lib/PoC/ucf/KC705/GPIO.LED.ucf" xil_pn:type="FILE_UCF">
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+    </file>
+    <file xil_pn:name="../../../lib/PoC/ucf/MetaStability.ucf" xil_pn:type="FILE_UCF">
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+    </file>
+    <file xil_pn:name="../../../lib/PoC/ucf/xil/xil_Sync.ucf" xil_pn:type="FILE_UCF">
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
   </files>
 
@@ -476,12 +476,12 @@
   </properties>
 
   <bindings>
-    <binding xil_pn:location="/top_FanControl_KC705" xil_pn:name="../../../ucf/MetaStability.ucf"/>
-    <binding xil_pn:location="/top_FanControl_KC705" xil_pn:name="../../../ucf/KC705/Clock.SystemClock.ucf"/>
-    <binding xil_pn:location="/top_FanControl_KC705" xil_pn:name="../../../ucf/KC705/Default.ucf"/>
-    <binding xil_pn:location="/top_FanControl_KC705" xil_pn:name="../../../ucf/KC705/GPIO.FanControl.ucf"/>
-    <binding xil_pn:location="/top_FanControl_KC705" xil_pn:name="../../../ucf/KC705/GPIO.LED.ucf"/>
-    <binding xil_pn:location="/top_FanControl_KC705" xil_pn:name="../../../ucf/xil_Sync.ucf"/>
+    <binding xil_pn:location="/top_FanControl_KC705" xil_pn:name="../../../lib/PoC/ucf/KC705/Clock.SystemClock.ucf"/>
+    <binding xil_pn:location="/top_FanControl_KC705" xil_pn:name="../../../lib/PoC/ucf/KC705/Default.ucf"/>
+    <binding xil_pn:location="/top_FanControl_KC705" xil_pn:name="../../../lib/PoC/ucf/KC705/GPIO.FanControl.ucf"/>
+    <binding xil_pn:location="/top_FanControl_KC705" xil_pn:name="../../../lib/PoC/ucf/KC705/GPIO.LED.ucf"/>
+    <binding xil_pn:location="/top_FanControl_KC705" xil_pn:name="../../../lib/PoC/ucf/MetaStability.ucf"/>
+    <binding xil_pn:location="/top_FanControl_KC705" xil_pn:name="../../../lib/PoC/ucf/xil/xil_Sync.ucf"/>
   </bindings>
 
   <libraries>

@@ -109,23 +109,23 @@
       <association xil_pn:name="Implementation" xil_pn:seqID="16"/>
       <library xil_pn:name="PoC"/>
     </file>
-    <file xil_pn:name="../../../ucf/ML605/Clock.SystemClock.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+    <file xil_pn:name="../../../lib/PoC/ucf/MetaStability.ucf" xil_pn:type="FILE_UCF">
+      <association xil_pn:name="Implementation" xil_pn:seqID="76"/>
     </file>
-    <file xil_pn:name="../../../ucf/ML605/Default.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+    <file xil_pn:name="../../../lib/PoC/ucf/xil/xil_Sync.ucf" xil_pn:type="FILE_UCF">
+      <association xil_pn:name="Implementation" xil_pn:seqID="77"/>
     </file>
-    <file xil_pn:name="../../../ucf/ML605/GPIO.FanControl.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+    <file xil_pn:name="../../../lib/PoC/ucf/ML605/Clock.SystemClock.ucf" xil_pn:type="FILE_UCF">
+      <association xil_pn:name="Implementation" xil_pn:seqID="78"/>
     </file>
-    <file xil_pn:name="../../../ucf/ML605/GPIO.LED.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
-    </file>
-    <file xil_pn:name="../../../ucf/MetaStability.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
-    </file>
-    <file xil_pn:name="../../../ucf/xil_Sync.ucf" xil_pn:type="FILE_UCF">
+    <file xil_pn:name="../../../lib/PoC/ucf/ML605/Default.ucf" xil_pn:type="FILE_UCF">
       <association xil_pn:name="Implementation" xil_pn:seqID="79"/>
+    </file>
+    <file xil_pn:name="../../../lib/PoC/ucf/ML605/GPIO.FanControl.ucf" xil_pn:type="FILE_UCF">
+      <association xil_pn:name="Implementation" xil_pn:seqID="80"/>
+    </file>
+    <file xil_pn:name="../../../lib/PoC/ucf/ML605/GPIO.LED.ucf" xil_pn:type="FILE_UCF">
+      <association xil_pn:name="Implementation" xil_pn:seqID="81"/>
     </file>
   </files>
 
