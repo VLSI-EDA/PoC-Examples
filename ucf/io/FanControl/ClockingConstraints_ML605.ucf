@@ -1,0 +1,12 @@
+## =============================================================================
+## User defined timing groups
+## =============================================================================
+TIMESPEC "TS_SystemClock"					= PERIOD "NET_SystemClock_200MHz"		200 MHz	HIGH 50 %;		# 200 MHz oscillator (50%/50% duty-cycle)
+
+
+# ===================================================================
+# CrossClock paths			(maximum delay is period of fastest clock)
+# ===================================================================
+# Ignore timings on async I/O pins
+NET "ML605_GPIO_*"						TIG;
+NET "ML605_FanControl_*"			TIG;

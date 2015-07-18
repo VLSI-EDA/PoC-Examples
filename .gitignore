@@ -1,10 +1,26 @@
-src/common/my_project.vhdl
-/projects/**/ise/**/*.*
-/projects/**/iseconfig/*.*
-!/projects/**/iseconfig/filter.filter
-__pycache__/
-*.pyc
+# general file excludes
+~*.tmp
+~*.docx
+*.fmt
 *~
 *.o
+~$*
+
+# ignore Python caches
+__pycache__
+
+# ignore Xilinx iMPACT files
+/iMPACT/*.*
+!/iMPACT/*.ipf
+/iMPACT/auto_project*.ipf
+
+# ignore Xilinx ISE and Vivado files
+/projects/**/*.*
+/projects/**/ise
+!/projects/**/*.xise
+!/projects/**/*.xpr
+!/projects/**/iseconfig/filter.filter
 
 
+# ignore files from PoC
+/src/common/my_project.vhdl

@@ -6,7 +6,7 @@
 -- Authors:					Patrick Lehmann
 --									Thomas B. Preusser
 --
--- Top-Module:			FanControl example design for a KC705 board
+-- Top-Module:			FanControl example design for a VC707 board
 --	
 -- Description:
 -- ------------------------------------
@@ -40,20 +40,20 @@ library PoC;
 use			PoC.physical.all;
 
 
-entity top_FanControl_KC705 is
+entity top_FanControl_VC707 is
   port (
-    KC705_SystemClock_200MHz_p	: in	STD_LOGIC;
-    KC705_SystemClock_200MHz_n	: in	STD_LOGIC;
+    VC707_SystemClock_200MHz_p	: in	STD_LOGIC;
+    VC707_SystemClock_200MHz_n	: in	STD_LOGIC;
 
-		KC705_GPIO_LED							: out	STD_LOGIC_VECTOR(7 downto 0);
+		VC707_GPIO_LED							: out	STD_LOGIC_VECTOR(7 downto 0);
 
-    KC705_FanControl_PWM				: out STD_LOGIC;
-    KC705_FanControl_Tacho			: in  STD_LOGIC
+    VC707_FanControl_PWM				: out STD_LOGIC;
+    VC707_FanControl_Tacho			: in  STD_LOGIC
   );
 end;
 
 
-architecture top of top_FanControl_KC705 is
+architecture top of top_FanControl_VC707 is
 	attribute KEEP											: BOOLEAN;
 
 	-- ===========================================================================
@@ -61,11 +61,11 @@ architecture top of top_FanControl_KC705 is
 	-- ===========================================================================
 	-- common configuration
 	constant DEBUG											: BOOLEAN							:= TRUE;
-	constant SYS_CLOCK_FREQ							: FREQ								:= 200.0 MHz;
+	constant SYS_CLOCK_FREQ							: FREQ								:= 200 MHz;
 	
 	-- ClockNetwork configuration
 	-- ===========================================================================
-	constant SYSTEM_CLOCK_FREQ					: FREQ								:= SYS_CLOCK_FREQ / 2.0;
+	constant SYSTEM_CLOCK_FREQ					: FREQ								:= SYS_CLOCK_FREQ / 2;
 
 
 	-- ===========================================================================
@@ -88,24 +88,20 @@ architecture top of top_FanControl_KC705 is
 	attribute KEEP of System_Clock			: signal is TRUE;
 	attribute KEEP of System_Reset			: signal is TRUE;
 
-
-  signal rst   : std_logic;
-  signal rst_r : std_logic_vector(5 downto 0) := (others => '1');
-
 begin
 	-- ===========================================================================
 	-- assert statements
 	-- ===========================================================================
 	assert FALSE report "FanControl configuration:"													severity NOTE;
-	assert FALSE report "  SYS_CLOCK_FREQ: " & to_string(SYS_CLOCK_FREQ)		severity note;
+	assert FALSE report "  SYS_CLOCK_FREQ: " & to_string(SYS_CLOCK_FREQ, 3)	severity note;
 
 	-- ===========================================================================
 	-- Input/output buffers
 	-- ===========================================================================
 	IBUFGDS_SystemClock : IBUFGDS
 		port map (
-			I			=> KC705_SystemClock_200MHz_p,
-			IB		=> KC705_SystemClock_200MHz_n,
+			I			=> VC707_SystemClock_200MHz_p,
+			IB		=> VC707_SystemClock_200MHz_n,
 			O			=> System_RefClock_200MHz
 		);
 
@@ -114,7 +110,7 @@ begin
 	-- ==========================================================================================================================================================
 	ClkNet_Reset		<= '0';
 	
-	ClkNet : entity PoC.clknet_ClockNetwork_KC705
+	ClkNet : entity PoC.clknet_ClockNetwork_VC707
 		generic map (
 			CLOCK_IN_FREQ						=> SYS_CLOCK_FREQ
 		)
@@ -155,7 +151,7 @@ begin
 	begin
 		GPIO_LED				<= "0000000" & ClkNet_ResetDone;
 		GPIO_LED_d			<= GPIO_LED when rising_edge(System_Clock);
-		KC705_GPIO_LED	<= GPIO_LED_d;
+		VC707_GPIO_LED	<= GPIO_LED_d;
 	end block;
 	-- ==========================================================================================================================================================
 	-- Fan Control
@@ -168,7 +164,7 @@ begin
 		signal FanControl_Tacho_sync		: STD_LOGIC;
 		
 	begin
-		FanControl_Tacho_async	<= KC705_FanControl_Tacho;
+		FanControl_Tacho_async	<= VC707_FanControl_Tacho;
 	
 		sync : entity PoC.xil_SyncBits
 			port map (
@@ -193,7 +189,7 @@ begin
 		
 		-- IOB-FF
 		FanControl_PWM_d				<= FanControl_PWM when rising_edge(System_Clock);
-		KC705_FanControl_PWM		<= FanControl_PWM_d;
+		VC707_FanControl_PWM		<= FanControl_PWM_d;
 	end block;
 
 end;

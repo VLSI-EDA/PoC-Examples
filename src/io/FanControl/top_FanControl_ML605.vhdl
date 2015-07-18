@@ -61,11 +61,11 @@ architecture top of top_FanControl_ML605 is
 	-- ===========================================================================
 	-- common configuration
 	constant DEBUG											: BOOLEAN							:= TRUE;
-	constant SYS_CLOCK_FREQ							: FREQ								:= 200.0 MHz;
+	constant SYS_CLOCK_FREQ							: FREQ								:= 200 MHz;
 	
 	-- ClockNetwork configuration
 	-- ===========================================================================
-	constant SYSTEM_CLOCK_FREQ					: FREQ								:= SYS_CLOCK_FREQ / 2.0;
+	constant SYSTEM_CLOCK_FREQ					: FREQ								:= SYS_CLOCK_FREQ / 2;
 
 
 	-- ===========================================================================
@@ -88,16 +88,12 @@ architecture top of top_FanControl_ML605 is
 	attribute KEEP of System_Clock			: signal is TRUE;
 	attribute KEEP of System_Reset			: signal is TRUE;
 
-
-  signal rst   : std_logic;
-  signal rst_r : std_logic_vector(5 downto 0) := (others => '1');
-
 begin
 	-- ===========================================================================
 	-- assert statements
 	-- ===========================================================================
 	assert FALSE report "FanControl configuration:"													severity NOTE;
-	assert FALSE report "  SYS_CLOCK_FREQ: " & to_string(SYS_CLOCK_FREQ)		severity note;
+	assert FALSE report "  SYS_CLOCK_FREQ: " & to_string(SYS_CLOCK_FREQ, 3)	severity note;
 
 	-- ===========================================================================
 	-- Input/output buffers

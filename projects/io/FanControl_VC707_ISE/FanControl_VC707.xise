@@ -22,17 +22,17 @@
     </file>
     <file xil_pn:name="../../../lib/PoC/src/common/components.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="3"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="15"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="16"/>
       <library xil_pn:name="PoC"/>
     </file>
     <file xil_pn:name="../../../lib/PoC/src/common/config.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="4"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="14"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="7"/>
       <library xil_pn:name="PoC"/>
     </file>
     <file xil_pn:name="../../../lib/PoC/src/common/physical.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="5"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="5"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="8"/>
       <library xil_pn:name="PoC"/>
     </file>
     <file xil_pn:name="../../../lib/PoC/src/common/strings.vhdl" xil_pn:type="FILE_VHDL">
@@ -52,56 +52,56 @@
     </file>
     <file xil_pn:name="../../../lib/PoC/src/io/io.pkg.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="9"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="13"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="15"/>
       <library xil_pn:name="PoC"/>
     </file>
     <file xil_pn:name="../../../lib/PoC/src/io/io_FanControl.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="10"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="17"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="18"/>
       <library xil_pn:name="PoC"/>
     </file>
     <file xil_pn:name="../../../lib/PoC/src/io/io_FrequencyCounter.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="11"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="12"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="14"/>
       <library xil_pn:name="PoC"/>
     </file>
     <file xil_pn:name="../../../lib/PoC/src/io/io_PulseWidthModulation.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="12"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="11"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="13"/>
       <library xil_pn:name="PoC"/>
     </file>
     <file xil_pn:name="../../../lib/PoC/src/io/io_TimingCounter.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="13"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="10"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="12"/>
       <library xil_pn:name="PoC"/>
     </file>
     <file xil_pn:name="../../../lib/PoC/src/xil/xil.pkg.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="14"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="9"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="11"/>
       <library xil_pn:name="PoC"/>
     </file>
     <file xil_pn:name="../../../lib/PoC/src/xil/xil_SyncBits.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="15"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="8"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="10"/>
       <library xil_pn:name="PoC"/>
     </file>
     <file xil_pn:name="../../../src/common/my_project.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="30"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="5"/>
       <library xil_pn:name="PoC"/>
     </file>
     <file xil_pn:name="../../../lib/PoC/src/xil/xil_SystemMonitor_Series7.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="50"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="7"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="9"/>
       <library xil_pn:name="PoC"/>
     </file>
-    <file xil_pn:name="../../../src/io/FanControl/VC707/top_FanControl_VC707.vhdl" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../../src/io/FanControl/top_FanControl_VC707.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="29"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="18"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="19"/>
     </file>
     <file xil_pn:name="../../../src/xil/clknet/clknet_ClockNetwork_VC707.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="30"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="16"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="17"/>
       <library xil_pn:name="PoC"/>
     </file>
     <file xil_pn:name="../../../src/common/my_config_VC707.vhdl" xil_pn:type="FILE_VHDL">
@@ -110,22 +110,25 @@
       <library xil_pn:name="PoC"/>
     </file>
     <file xil_pn:name="../../../lib/PoC/ucf/MetaStability.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="76"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
-    <file xil_pn:name="../../../lib/PoC/ucf/xil/xil_Sync.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="77"/>
+    <file xil_pn:name="../../../lib/PoC/ucf/xil/xil_SyncBits.ucf" xil_pn:type="FILE_UCF">
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
     <file xil_pn:name="../../../lib/PoC/ucf/VC707/Clock.SystemClock.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="78"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
     <file xil_pn:name="../../../lib/PoC/ucf/VC707/Default.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="79"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
     <file xil_pn:name="../../../lib/PoC/ucf/VC707/GPIO.FanControl.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="80"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
     <file xil_pn:name="../../../lib/PoC/ucf/VC707/GPIO.LED.ucf" xil_pn:type="FILE_UCF">
-      <association xil_pn:name="Implementation" xil_pn:seqID="81"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+    </file>
+    <file xil_pn:name="../../../ucf/io/FanControl/ClockingConstraints_VC707.ucf" xil_pn:type="FILE_UCF">
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
   </files>
 
@@ -150,7 +153,7 @@
     <property xil_pn:name="Analysis Effort Level" xil_pn:value="Standard" xil_pn:valueState="default"/>
     <property xil_pn:name="Asynchronous To Synchronous" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Auto Implementation Compile Order" xil_pn:value="true" xil_pn:valueState="default"/>
-    <property xil_pn:name="Auto Implementation Top" xil_pn:value="false" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="Auto Implementation Top" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Automatic BRAM Packing" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Automatically Insert glbl Module in the Netlist" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Automatically Run Generate Target PROM/ACE File" xil_pn:value="false" xil_pn:valueState="default"/>
@@ -264,7 +267,7 @@
     <property xil_pn:name="Ignore User Timing Constraints Map" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Ignore User Timing Constraints Par" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Implementation Top" xil_pn:value="Architecture|top_FanControl_VC707|top" xil_pn:valueState="non-default"/>
-    <property xil_pn:name="Implementation Top File" xil_pn:value="../../../../src/io/FanControl/VC707/top_FanControl_VC707.vhdl" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="Implementation Top File" xil_pn:value="../../../../src/io/FanControl/top_FanControl_VC707.vhdl" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Implementation Top Instance Path" xil_pn:value="/top_FanControl_VC707" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Include 'uselib Directive in Verilog File" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Include SIMPRIM Models in Verilog File" xil_pn:value="false" xil_pn:valueState="default"/>
@@ -477,11 +480,12 @@
 
   <bindings>
     <binding xil_pn:location="/top_FanControl_VC707" xil_pn:name="../../../lib/PoC/ucf/MetaStability.ucf"/>
-    <binding xil_pn:location="/top_FanControl_VC707" xil_pn:name="../../../lib/PoC/ucf/xil/xil_Sync.ucf"/>
+    <binding xil_pn:location="/top_FanControl_VC707" xil_pn:name="../../../lib/PoC/ucf/xil/xil_SyncBits.ucf"/>
     <binding xil_pn:location="/top_FanControl_VC707" xil_pn:name="../../../lib/PoC/ucf/VC707/Clock.SystemClock.ucf"/>
     <binding xil_pn:location="/top_FanControl_VC707" xil_pn:name="../../../lib/PoC/ucf/VC707/Default.ucf"/>
     <binding xil_pn:location="/top_FanControl_VC707" xil_pn:name="../../../lib/PoC/ucf/VC707/GPIO.FanControl.ucf"/>
     <binding xil_pn:location="/top_FanControl_VC707" xil_pn:name="../../../lib/PoC/ucf/VC707/GPIO.LED.ucf"/>
+    <binding xil_pn:location="/top_FanControl_VC707" xil_pn:name="../../../ucf/io/FanControl/ClockingConstraints_VC707.ucf"/>
   </bindings>
 
   <libraries>
