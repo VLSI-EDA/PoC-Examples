@@ -6,8 +6,8 @@ functions such as FIFOs, RAM wrapper, and ALUs. The hardware modules are
 typically provided as VHDL or Verilog source code, so it can be easily re-used
 in a variety of hardware designs.
 
-This repository provides common examples and synthesis tests to show how the PoC
-Library can be used. The PoC Library is referenced as a git submodule.
+This repository provides common examples and synthesis tests to show how the
+PoC-Library can be used. The PoC-Library is referenced as a git submodule.
 
 Table of Content:
 ================================================================================
