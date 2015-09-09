@@ -32,39 +32,48 @@ as transfer protocols. See the [Download][wiki:download] wiki page for more deta
 For SSH protocol use the URL `ssh://git@github.com:VLSI-EDA/PoC-Examples.git` or command
 line instruction:
 
-    cd <GitRoot>
-    git clone --recursive ssh://git@github.com:VLSI-EDA/PoC-Examples.git PoC-Examples
+```PowerShell
+cd <GitRoot>
+git clone --recursive ssh://git@github.com:VLSI-EDA/PoC-Examples.git PoC-Examples
+```
 
 For HTTPS protocol use the URL `https://github.com/VLSI-EDA/PoC-Examples.git` or command
 line instruction:
 
-    cd <GitRoot>
-    git clone --recursive https://github.com/VLSI-EDA/PoC-Examples.git PoC-Examples
+```PowerShell
+cd <GitRoot>
+git clone --recursive https://github.com/VLSI-EDA/PoC-Examples.git PoC-Examples
+```
+
+**Note:** The option `--recursive` performs a recursive clone operation for all
+linked [git submodules][git_submod]. An additional `git submodule init` and
+`git submodule update` call is not needed anymore. 
 
  [download]: https://github.com/VLSI-EDA/PoC-Examples/archive/master.zip
+ [git_submod]: http://git-scm.com/book/en/v2/Git-Tools-Submodules
 
 
 ## 3 Requirements
 
-The PoC-Library and the PoC-Examples Collection come with some scripts to ease most
+**The PoC-Examples Collection** and the PoC-Library come with some scripts to ease most
 of the common tasks, like running testbenches, generating IP cores or synthesizing
 examples. We choose to use Python as a platform independent scripting environment.
 All Python scripts are wrapped in PowerShell or Bash scripts, to hide some platform
 specifics of Windows or Linux. See the [Requirements][wiki:requirements] wiki page
 for more details and download sources.
 
-#### Common requirements:
+##### Common requirements:
 
  - Programming languages and runtimes:
 	- [Python 3][python] (&ge; 3.4):
 	     - [colorama][colorama]
  - Synthesis tool chains:
      - Xilinx ISE 14.7 or
-     - Xilinx Vivado 2014.x or
-     - Altera Quartus II 13.x
+     - Xilinx Vivado &ge; 2014.1 or
+     - Altera Quartus-II &ge; 13.x
  - Simulation tool chains:
      - Xilinx ISE Simulator 14.7 or
-     - Xilinx Vivado Simulator 2014.x or
+     - Xilinx Vivado Simulator &ge; 2014.1 or
      - Mentor Graphics ModelSim Altera Edition or
      - Mentor Graphics QuestaSim or
      - [GHDL][ghdl] and [GTKWave][gtkwave]
@@ -74,17 +83,17 @@ for more details and download sources.
  [ghdl]:		https://sourceforge.net/projects/ghdl-updates/
  [gtkwave]:		http://gtkwave.sourceforge.net/
 
-#### Linux specific requirements:
+##### Linux specific requirements:
  
  - Debian specific:
 	- bash is configured as `/bin/sh` ([read more](https://wiki.debian.org/DashAsBinSh))  
       `dpkg-reconfigure dash`
  
-#### Windows specific requirements:
+##### Windows specific requirements:
 
  - PowerShell 4.0 ([Windows Management Framework 4.0][wmf40])
     - Allow local script execution ([read more][execpol])  
-      `PS> Set-ExecutionPolicy RemoteSigned`
+      `Set-ExecutionPolicy RemoteSigned`
     - PowerShell Community Extensions 3.2 ([pscx.codeplex.com][pscx])
 
  [wmf40]:   http://www.microsoft.com/en-US/download/details.aspx?id=40855
@@ -94,7 +103,7 @@ for more details and download sources.
 
 ## 4 Configure PoC-Examples on a Local System
 
-To explore PoC's and PoC-Examples' full potential, it's required to configure
+To explore PoC-Examples' and PoC's full potential, it's required to configure
 some paths and synthesis or simulation tool chains. The following commands
 start a guided configuration process. Please follow the instructions. It's
 possible to relaunch the process at every time, for example to register new
@@ -103,32 +112,22 @@ wiki page for more details.
 
 #### 4.1 Configuring the Embedded PoC-Library
 
-##### Linux:
-
-Run the following command line instructions to configure the embedded PoC-Library
-on your local system.
-
-```Bash
-cd <ExamplesRoot>
-cd lib/PoC
-./poc.sh --configure
-```
-
-##### Windows (PowerShell):
-
 > All Windows command line instructions are intended for **Windows PowerShell**,
 > if not marked otherwise. So executing the following instructions in Windows
 > Command Prompt (`cmd.exe`) won't function or result in errors! See the
 > [Requirements][wiki:requirements] wiki page on where to download or update
 > PowerShell.
 
+Run the following command line instructions to configure the embedded PoC-Library
+on your local system.
+
 ```PowerShell
 cd <ExamplesRoot>
-cd lib\PoC
+cd lib\PoC\
 .\poc.ps1 --configure
 ```
 
-### 4.2 Creating PoC's my_project File
+#### 4.2 Creating PoC's my_project File
 
 The PoC-Library needs two VHDL files for it's configuration. These files are used
 to determine the most suitable implementation depending on the provided platform
@@ -140,12 +139,18 @@ The **my_project** file can be created from a template provided by PoC in
     
 The file must to be copyed into the collection's source directory `<ExamplesRoot>\src\common`
 and rename into `my_project.vhdl`. This file **must not** be included into version control
-systems - it's private to a host computer. my_project.vhdl defines two global
-constants, which need to be adjusted:
+systems - it's private to a host computer. 
+
+```PowerShell
+cd <ExamplesRoot>
+cp lib\PoC\src\common\my_project.vhdl.template src\common\my_project.vhdl
+```
+
+`my_project.vhdl` defines two global constants, which need to be adjusted:
 
 ```VHDL
-constant MY_PROJECT_DIR       : string  := "CHANGE THIS";   -- e.g. "d:/vhdl/myproject/", "/home/me/projects/myproject/"
-constant MY_OPERATING_SYSTEM  : string  := "CHANGE THIS";   -- e.g. "WINDOWS", "LINUX"
+constant MY_PROJECT_DIR      : string := "CHANGE THIS"; -- e.g. d:/vhdl/myproject/, /home/me/projects/myproject/"
+constant MY_OPERATING_SYSTEM : string := "CHANGE THIS"; -- e.g. WINDOWS, LINUX
 ```
 
 ## 5 Synthesizing Examples
