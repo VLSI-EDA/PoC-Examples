@@ -171,7 +171,7 @@ The PoC-Examples Collection is shipped with project files for various tool chain
 
 
 
- [wiki:download]:		https://github.com/VLSI-EDA/PoC/wiki/Download
- [wiki:requirements]:	https://github.com/VLSI-EDA/PoC/wiki/Requirements
- [wiki:configuration]:	https://github.com/VLSI-EDA/PoC/wiki/Configuration
- [wiki:installation]:	https://github.com/VLSI-EDA/PoC/wiki/Installation
+ [wiki:download]:		https://github.com/VLSI-EDA/PoC-Examples/wiki/Download
+ [wiki:requirements]:	https://github.com/VLSI-EDA/PoC-Examples/wiki/Requirements
+ [wiki:configuration]:	https://github.com/VLSI-EDA/PoC-Examples/wiki/Configuration
+ 
