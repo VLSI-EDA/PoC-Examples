@@ -1,0 +1,242 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 1991-2013 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus II 64-Bit
+# Version 13.0.0 Build 156 04/24/2013 SJ Full Version
+# Date created = 17:31:33  June 05, 2013
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default varithes for assignments are stored in the file:
+#		memtest_de0_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus II software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "Cyclone III"
+set_global_assignment -name DEVICE EP3C16F484C6
+set_global_assignment -name TOP_LEVEL_ENTITY memtest_de0
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 13.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:31:33  JUNE 05, 2013"
+set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name DEVICE_FILTER_PACKAGE FBGA
+set_global_assignment -name DEVICE_FILTER_PIN_COUNT 484
+set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 6
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
+set_location_assignment PIN_F1 -to btn[2]
+set_location_assignment PIN_B1 -to led[9]
+set_location_assignment PIN_B2 -to led[8]
+set_location_assignment PIN_C2 -to led[7]
+set_location_assignment PIN_C1 -to led[6]
+set_location_assignment PIN_E1 -to led[5]
+set_location_assignment PIN_F2 -to led[4]
+set_location_assignment PIN_H1 -to led[3]
+set_location_assignment PIN_J3 -to led[2]
+set_location_assignment PIN_J2 -to led[1]
+set_location_assignment PIN_J1 -to led[0]
+set_location_assignment PIN_B12 -to clk_in
+set_location_assignment PIN_A7 -to sd_a[11]
+set_location_assignment PIN_B4 -to sd_a[10]
+set_location_assignment PIN_B7 -to sd_a[9]
+set_location_assignment PIN_C7 -to sd_a[8]
+set_location_assignment PIN_A6 -to sd_a[7]
+set_location_assignment PIN_B6 -to sd_a[6]
+set_location_assignment PIN_C6 -to sd_a[5]
+set_location_assignment PIN_A5 -to sd_a[4]
+set_location_assignment PIN_C3 -to sd_a[3]
+set_location_assignment PIN_B3 -to sd_a[2]
+set_location_assignment PIN_A3 -to sd_a[1]
+set_location_assignment PIN_C4 -to sd_a[0]
+
+set_location_assignment PIN_A4 -to sd_ba[1]
+set_location_assignment PIN_B5 -to sd_ba[0]
+set_location_assignment PIN_G8 -to sd_cas
+set_location_assignment PIN_E6 -to sd_cke
+set_location_assignment PIN_G7 -to sd_cs
+set_location_assignment PIN_F10 -to sd_dq[15]
+set_location_assignment PIN_E10 -to sd_dq[14]
+set_location_assignment PIN_A10 -to sd_dq[13]
+set_location_assignment PIN_B10 -to sd_dq[12]
+set_location_assignment PIN_C10 -to sd_dq[11]
+set_location_assignment PIN_A9 -to sd_dq[10]
+set_location_assignment PIN_B9 -to sd_dq[9]
+set_location_assignment PIN_A8 -to sd_dq[8]
+set_location_assignment PIN_F8 -to sd_dq[7]
+set_location_assignment PIN_H9 -to sd_dq[6]
+set_location_assignment PIN_G9 -to sd_dq[5]
+set_location_assignment PIN_F9 -to sd_dq[4]
+set_location_assignment PIN_E9 -to sd_dq[3]
+set_location_assignment PIN_H10 -to sd_dq[2]
+set_location_assignment PIN_G10 -to sd_dq[1]
+set_location_assignment PIN_D10 -to sd_dq[0]
+set_location_assignment PIN_E7 -to sd_ldm
+set_location_assignment PIN_F7 -to sd_ras
+set_location_assignment PIN_B8 -to sd_udm
+set_location_assignment PIN_D6 -to sd_we
+set_location_assignment PIN_E5 -to sd_ck
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_a[11]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_a[10]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_a[9]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_a[8]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_a[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_a[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_a[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_a[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_a[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_a[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_a[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_a[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_ba[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_ba[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_cas
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_ck
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_cke
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_cs
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[15]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[13]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[14]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[12]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[11]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[10]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[9]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[8]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_dq[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_ldm
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_udm
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_we
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sd_ras
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_a[11]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_a[10]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_a[9]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_a[8]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_a[7]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_a[6]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_a[5]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_a[4]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_a[3]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_a[2]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_a[1]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_a[0]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_ba[1]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_ba[0]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_cas
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_cke
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_cs
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[15]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[13]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[14]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[12]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[11]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[10]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[9]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[8]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[7]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[6]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[5]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[4]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[3]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[2]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[1]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_dq[0]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_we
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to sd_ras
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[15]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[13]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[14]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[12]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[11]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[10]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[9]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[8]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[7]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[6]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[5]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[4]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[3]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[2]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[1]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to sd_dq[0]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[15]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[13]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[14]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[12]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[11]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[10]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[9]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[8]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[7]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[6]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[5]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[4]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[3]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[2]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[1]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to sd_dq[0]
+set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON
+
+
+
+
+
+
+set_global_assignment -name SDC_FILE memtest_de0.sdc
+set_global_assignment -name VHDL_FILE my_project.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../src/common/my_config_DE0.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/common/utils.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/common/strings.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/common/config.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/arith/arith.pkg.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/arith/arith_prng.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/arith/arith_counter_gray.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/mem/ocram/ocram.pkg.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/mem/ocram/ocram_sdp.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/fifo/fifo.pkg.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/fifo/fifo_ic_got.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/fifo/fifo_cc_got.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/mem/sdram/sdram_ctrl_fsm.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/mem/sdram/sdram_ctrl_de0.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/mem/sdram/sdram_ctrl_phy_de0.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../src/mem/memtest_fsm.vhdl
+set_global_assignment -name QIP_FILE ../../../../src/mem/sdram/memtest_de0_pll.qip
+set_global_assignment -name VHDL_FILE ../../../../src/mem/sdram/memtest_de0.vhdl
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

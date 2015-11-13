@@ -15,12 +15,28 @@ __pycache__
 /iMPACT/auto_project*.ipf
 
 # ignore Xilinx ISE and Vivado files
+# and Quartus files
 /projects/**/*.*
 /projects/**/ise
+/projects/**/db/
+/projects/**/incremental_db/
+/projects/**/output_files/
+/projects/**/simulation/
+/projects/**/greybox_tmp/
+!/projects/**/*.ucf
+!/projects/**/*.xcf
 !/projects/**/*.xise
 !/projects/**/*.xpr
 !/projects/**/iseconfig/filter.filter
+!/projects/**/*.sdc
+!/projects/**/*.qpf
+!/projects/**/*.qsf
+!/projects/**/*.vhdl
 
 
 # ignore files from PoC
 /src/common/my_project.vhdl
+
+# general whitelist
+!.publish
+!.git*
