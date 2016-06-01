@@ -27,6 +27,7 @@ __pycache__
 !/projects/**/*.xcf
 !/projects/**/*.xise
 !/projects/**/*.xpr
+!/projects/**/ise/.gitempty
 !/projects/**/iseconfig/filter.filter
 !/projects/**/*.sdc
 !/projects/**/*.qpf

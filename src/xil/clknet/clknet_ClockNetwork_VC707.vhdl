@@ -46,7 +46,7 @@ use			PoC.io.all;
 entity clknet_ClockNetwork_VC707 is
 	generic (
 		DEBUG											: BOOLEAN												:= FALSE;
-		CLOCK_IN_FREQ							: FREQ													:= 200.0 MHz
+		CLOCK_IN_FREQ							: FREQ													:= 200 MHz
 	);
 	port (
 		ClockIn_200MHz						: in	STD_LOGIC;
@@ -100,7 +100,7 @@ architecture rtl of clknet_ClockNetwork_VC707 is
 	--	slowest output clock:	10 Mhz
 	--	worst case delay:			(Control_Clock freq / slowest clock in MHz) * register stages		+ safety
 	--		=> 44								(200 MHz						/ 10 MHz)								* 2 register stages	+ 4
-	constant CMB_DELAY_CYCLES						: POSITIVE		:= integer(real(CLOCK_IN_FREQ / 10.0 MHz) * 2.0 + 4.0);
+	constant CMB_DELAY_CYCLES						: POSITIVE		:= integer(real(CLOCK_IN_FREQ / 10 MHz) * 2.0 + 4.0);
 
 	signal ClkNet_Reset									: STD_LOGIC;
 	
@@ -158,7 +158,7 @@ begin
 	-- ResetControl
 	-- ==================================================================
 	-- synchronize external (async) ClockNetwork_Reset and internal (but async) MMCM_Locked signals to "Control_Clock" domain
-	syncControlClock : entity PoC.xil_SyncBits
+	syncControlClock : entity PoC.sync_Bits_Xilinx
 		generic map (
 			BITS					=> 3										-- number of BITS to synchronize
 		)
@@ -190,8 +190,8 @@ begin
 	PLL_LockedState					<= ffrs(q => PLL_LockedState,	 rst => PLL_Reset,			set => PLL_Locked_re)	 when rising_edge(Control_Clock);
 	
 	-- delay CMB resets until the slowed syncBlock has noticed that LockedState is low
-	MMCM_Reset_delayed			<= sr_left(MMCM_Reset_delayed, MMCM_ResetState) when rising_edge(Control_Clock);
-	PLL_Reset_delayed				<= sr_left(PLL_Reset_delayed,	 PLL_ResetState)	when rising_edge(Control_Clock);
+	MMCM_Reset_delayed			<= shreg_left(MMCM_Reset_delayed, MMCM_ResetState) when rising_edge(Control_Clock);
+	PLL_Reset_delayed				<= shreg_left(PLL_Reset_delayed,	 PLL_ResetState)	when rising_edge(Control_Clock);
 	
 	MMCM_Reset							<= MMCM_Reset_delayed(MMCM_Reset_delayed'high);
 	PLL_Reset								<= PLL_Reset_delayed(PLL_Reset_delayed'high);
@@ -267,8 +267,8 @@ begin
 			BANDWIDTH								=> "LOW",																			-- LOW = Jitter Filter
 			COMPENSATION						=> "BUF_IN",	--"ZHOLD",
 
-			CLKIN1_PERIOD						=> to_real(to_time(CLOCK_IN_FREQ), 1.0 ns),
-			CLKIN2_PERIOD						=> to_real(to_time(CLOCK_IN_FREQ), 1.0 ns),		-- Not used
+			CLKIN1_PERIOD						=> 1.0e9 / real(CLOCK_IN_FREQ / 1 Hz),
+			CLKIN2_PERIOD						=> 1.0e9 / real(CLOCK_IN_FREQ / 1 Hz),				-- Not used
 			REF_JITTER1							=> 0.00048,
 			REF_JITTER2							=> 0.00048,																		-- Not used
 
@@ -352,8 +352,8 @@ begin
 			BANDWIDTH						=> "HIGH",
 			COMPENSATION				=> "BUF_IN",
 
-			CLKIN1_PERIOD				=> to_real(to_time(CLOCK_IN_FREQ), 1.0 ns),
-			CLKIN2_PERIOD				=> to_real(to_time(CLOCK_IN_FREQ), 1.0 ns),		-- Not used
+			CLKIN1_PERIOD				=> 1.0e9 / real(CLOCK_IN_FREQ / 1 Hz),
+			CLKIN2_PERIOD				=> 1.0e9 / real(CLOCK_IN_FREQ / 1 Hz),				-- Not used
 			REF_JITTER1					=> 0.00048,
 			REF_JITTER2					=> 0.00048,
 
@@ -410,42 +410,42 @@ begin
 	Clock_10MHz						<= MMCM_Clock_10MHz_BUFG;
 	
 	-- synchronize internal Locked signal to ouput clock domains
-	syncLocked250MHz : entity PoC.xil_SyncBits
+	syncLocked250MHz : entity PoC.sync_Bits_Xilinx
 		port map (
 			Clock					=> MMCM_Clock_250MHz_BUFG,		-- Clock to be synchronized to
 			Input(0)			=> Locked,										-- Data to be synchronized
 			Output(0)			=> Clock_Stable_250MHz				-- synchronised data
 		);
 	
-	syncLocked200MHz : entity PoC.xil_SyncBits
+	syncLocked200MHz : entity PoC.sync_Bits_Xilinx
 		port map (
 			Clock					=> MMCM_Clock_200MHz_BUFG,		-- Clock to be synchronized to
 			Input(0)			=> Locked,										-- Data to be synchronized
 			Output(0)			=> Clock_Stable_200MHz				-- synchronised data
 		);
 
-	syncLocked175MHz : entity PoC.xil_SyncBits
+	syncLocked175MHz : entity PoC.sync_Bits_Xilinx
 		port map (
 			Clock					=> PLL_Clock_175MHz_BUFG,			-- Clock to be synchronized to
 			Input(0)			=> Locked,										-- Data to be synchronized
 			Output(0)			=> Clock_Stable_175MHz				-- synchronised data
 		);
 
-	syncLocked125MHz : entity PoC.xil_SyncBits
+	syncLocked125MHz : entity PoC.sync_Bits_Xilinx
 		port map (
 			Clock					=> MMCM_Clock_125MHz_BUFG,		-- Clock to be synchronized to
 			Input(0)			=> Locked,										-- Data to be synchronized
 			Output(0)			=> Clock_Stable_125MHz				-- synchronised data
 		);
 
-	syncLocked100MHz : entity PoC.xil_SyncBits
+	syncLocked100MHz : entity PoC.sync_Bits_Xilinx
 		port map (
 			Clock					=> MMCM_Clock_100MHz_BUFG,		-- Clock to be synchronized to
 			Input(0)			=> Locked,										-- Data to be synchronized
 			Output(0)			=> Clock_Stable_100MHz				-- synchronised data
 		);
 
-	syncLocked10MHz : entity PoC.xil_SyncBits
+	syncLocked10MHz : entity PoC.sync_Bits_Xilinx
 		port map (
 			Clock					=> MMCM_Clock_10MHz_BUFG,			-- Clock to be synchronized to
 			Input(0)			=> Locked,										-- Data to be synchronized

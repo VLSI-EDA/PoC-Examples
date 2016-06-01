@@ -166,7 +166,7 @@ begin
 	begin
 		FanControl_Tacho_async	<= ML605_FanControl_Tacho;
 	
-		sync : entity PoC.xil_SyncBits
+		sync : entity PoC.sync_Bits
 			port map (
 				Clock				=> System_Clock,						-- Clock to be synchronized to
 				Input(0)		=> FanControl_Tacho_async,	-- Data to be synchronized

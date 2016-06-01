@@ -222,12 +222,15 @@ set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON
 set_global_assignment -name SDC_FILE memtest_de0.sdc
 set_global_assignment -name VHDL_FILE my_project.vhdl -library poc
 set_global_assignment -name VHDL_FILE ../../../../src/common/my_config_DE0.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/common/vectors.vhdl -library poc
 set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/common/utils.vhdl -library poc
 set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/common/strings.vhdl -library poc
 set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/common/config.vhdl -library poc
 set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/arith/arith.pkg.vhdl -library poc
 set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/arith/arith_prng.vhdl -library poc
 set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/arith/arith_counter_gray.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/arith/arith_carrychain_inc.vhdl -library poc
+set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/mem/mem.pkg.vhdl -library poc
 set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/mem/ocram/ocram.pkg.vhdl -library poc
 set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/mem/ocram/ocram_sdp.vhdl -library poc
 set_global_assignment -name VHDL_FILE ../../../../lib/PoC/src/fifo/fifo.pkg.vhdl -library poc

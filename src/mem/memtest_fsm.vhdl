@@ -61,6 +61,7 @@ use ieee.numeric_std.all;
 
 library poc;
 use poc.arith.all;
+use poc.utils.all;
 
 entity memtest_fsm is
   
@@ -89,7 +90,7 @@ architecture rtl of memtest_fsm is
   
   -- Main FSM
   type FSM_TYPE is (INIT, WRITE_BLOCK, READ_BLOCK,
-                    WRITE_READ1, WRITE_READ2);
+                    WRITE_READ1, WRITE_READ2, FINISHED);
   signal fsm_cs : FSM_TYPE;
   signal fsm_ns : FSM_TYPE;
 
@@ -127,7 +128,10 @@ architecture rtl of memtest_fsm is
   signal rd_failed_r   : std_logic;
   signal rd_failed_rst : std_logic;
   signal rd_failed_set : std_logic;
-  
+
+	-- Run counter
+	signal run_r   : unsigned(1 downto 0) := (others => '0');
+	signal run_inc : std_logic;
 begin  -- rtl
 
   -----------------------------------------------------------------------------
@@ -166,12 +170,13 @@ begin  -- rtl
     fsm_ns    <= fsm_cs;
     mem_req   <= '0';
     mem_write <= '-';
+    run_inc   <= '0';
 
     addr_rst  <= '0';
     addr_inc  <= '0';
     wdata_rst <= '0';
     wdata_got <= '0';
-    
+		
     case fsm_cs is
       when INIT =>
         wdata_rst <= '1';
@@ -207,7 +212,12 @@ begin  -- rtl
       when WRITE_READ1 =>
         if block_finished = '1' then
           addr_rst <= '1';
-          fsm_ns   <= WRITE_BLOCK;
+					if SIMULATION then
+						fsm_ns <= FINISHED;
+					else
+						run_inc <= '1';
+						fsm_ns <= WRITE_BLOCK;
+					end if;
         else
           mem_req   <= '1';
           mem_write <= '1';
@@ -226,6 +236,9 @@ begin  -- rtl
           addr_inc <= '1';
           fsm_ns   <= WRITE_READ1;
         end if;
+
+			when FINISHED =>
+				null;
     end case;
   end process;
 
@@ -267,9 +280,14 @@ begin  -- rtl
       if rst = '1' then
         fsm_cs    <= INIT;
         chkfsm_cs <= CHK_INIT;
+				run_r     <= (others => '0');
       else
         fsm_cs    <= fsm_ns;
         chkfsm_cs <= chkfsm_ns;
+				
+				if run_inc = '1' then
+					run_r <= run_r + 1;
+				end if;
       end if;
 
       if addr_rst = '1' then
@@ -304,6 +322,5 @@ begin  -- rtl
   mem_wdata <= std_logic_vector(wdata_r);
 
   status(0) <= rd_failed_r;
-  status(1) <= addr_r(A_BITS-3);
-  status(2) <= exp_rdata_r(D_BITS-3);
+  status(2 downto 1) <= std_logic_vector(run_r);
 end rtl;

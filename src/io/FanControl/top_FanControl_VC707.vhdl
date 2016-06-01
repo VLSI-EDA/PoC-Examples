@@ -45,8 +45,6 @@ entity top_FanControl_VC707 is
     VC707_SystemClock_200MHz_p	: in	STD_LOGIC;
     VC707_SystemClock_200MHz_n	: in	STD_LOGIC;
 
-		VC707_GPIO_LED							: out	STD_LOGIC_VECTOR(7 downto 0);
-
     VC707_FanControl_PWM				: out STD_LOGIC;
     VC707_FanControl_Tacho			: in  STD_LOGIC
   );
@@ -61,39 +59,21 @@ architecture top of top_FanControl_VC707 is
 	-- ===========================================================================
 	-- common configuration
 	constant DEBUG											: BOOLEAN							:= TRUE;
-	constant SYS_CLOCK_FREQ							: FREQ								:= 200 MHz;
-	
-	-- ClockNetwork configuration
-	-- ===========================================================================
-	constant SYSTEM_CLOCK_FREQ					: FREQ								:= SYS_CLOCK_FREQ / 2;
-
+	constant SYSTEM_CLOCK_FREQ					: FREQ								:= 200 MHz;
 
 	-- ===========================================================================
 	-- signal declarations
 	-- ===========================================================================
-	-- clock and reset signals
-  signal System_RefClock_200MHz				: STD_LOGIC;
-
-	signal ClkNet_Reset									: STD_LOGIC;
-	signal ClkNet_ResetDone							: STD_LOGIC;
-
-	signal SystemClock_200MHz						: STD_LOGIC;
-	signal SystemClock_100MHz						: STD_LOGIC;
-
-	signal SystemClock_Stable_200MHz		: STD_LOGIC;
-	signal SystemClock_Stable_100MHz		: STD_LOGIC;
-
+	signal System_Clock_ibufgds					: STD_LOGIC;
 	signal System_Clock									: STD_LOGIC;
 	signal System_Reset									: STD_LOGIC;
-	attribute KEEP of System_Clock			: signal is TRUE;
-	attribute KEEP of System_Reset			: signal is TRUE;
 
 begin
 	-- ===========================================================================
 	-- assert statements
 	-- ===========================================================================
 	assert FALSE report "FanControl configuration:"													severity NOTE;
-	assert FALSE report "  SYS_CLOCK_FREQ: " & to_string(SYS_CLOCK_FREQ, 3)	severity note;
+	assert FALSE report "  SYSTEM_CLOCK_FREQ: " & to_string(SYSTEM_CLOCK_FREQ, 3)	severity note;
 
 	-- ===========================================================================
 	-- Input/output buffers
@@ -102,60 +82,19 @@ begin
 		port map (
 			I			=> VC707_SystemClock_200MHz_p,
 			IB		=> VC707_SystemClock_200MHz_n,
-			O			=> System_RefClock_200MHz
+			O			=> System_Clock_ibufgds
 		);
 
-	-- ==========================================================================================================================================================
-	-- ClockNetwork
-	-- ==========================================================================================================================================================
-	ClkNet_Reset		<= '0';
-	
-	ClkNet : entity PoC.clknet_ClockNetwork_VC707
-		generic map (
-			CLOCK_IN_FREQ						=> SYS_CLOCK_FREQ
-		)
+	BUFG_SystemClock : BUFG
 		port map (
-			ClockIn_200MHz					=> System_RefClock_200MHz,
-
-			ClockNetwork_Reset			=> ClkNet_Reset,
-			ClockNetwork_ResetDone	=> ClkNet_ResetDone,
-			
-			Control_Clock_200MHz		=> open,
-			
-			Clock_250MHz						=> open,
-			Clock_200MHz						=> SystemClock_200MHz,
---			Clock_175MHz						=> open,
-			Clock_125MHz						=> open,
-			Clock_100MHz						=> SystemClock_100MHz,
-			Clock_10MHz							=> open,
-
-			Clock_Stable_250MHz			=> open,
-			Clock_Stable_200MHz			=> SystemClock_Stable_200MHz,
---			Clock_Stable_175MHz			=> open,
-			Clock_Stable_125MHz			=> open,
-			Clock_Stable_100MHz			=> SystemClock_Stable_100MHz,
-			Clock_Stable_10MHz			=> open
-		);
+			I => System_Clock_ibufgds,
+			O => System_Clock);
 	
-	-- system signals
-	System_Clock		<= SystemClock_100MHz;
-	System_Reset		<= not SystemClock_Stable_100MHz;
+		System_Reset		<= '0';
 
-	-- ==========================================================================================================================================================
-	-- General Purpose I/O
-	-- ==========================================================================================================================================================
-	blkGPIO : block
-		signal GPIO_LED				: STD_LOGIC_VECTOR(7 downto 0);
-		signal GPIO_LED_d			: STD_LOGIC_VECTOR(7 downto 0)		:= (others => '0');
-		
-	begin
-		GPIO_LED				<= "0000000" & ClkNet_ResetDone;
-		GPIO_LED_d			<= GPIO_LED when rising_edge(System_Clock);
-		VC707_GPIO_LED	<= GPIO_LED_d;
-	end block;
-	-- ==========================================================================================================================================================
+	-- ===========================================================================
 	-- Fan Control
-	-- ==========================================================================================================================================================
+	-- ===========================================================================
 	blkFanControl : block
 		signal FanControl_PWM						: STD_LOGIC;
 		signal FanControl_PWM_d					: STD_LOGIC				:= '0';
@@ -166,7 +105,7 @@ begin
 	begin
 		FanControl_Tacho_async	<= VC707_FanControl_Tacho;
 	
-		sync : entity PoC.xil_SyncBits
+		sync : entity PoC.sync_Bits
 			port map (
 				Clock				=> System_Clock,						-- Clock to be synchronized to
 				Input(0)		=> FanControl_Tacho_async,	-- Data to be synchronized
@@ -175,7 +114,7 @@ begin
 	
 		Fan : entity PoC.io_FanControl
 			generic map (
-				CLOCK_FREQ					=> SYSTEM_CLOCK_FREQ		-- 100 MHz
+				CLOCK_FREQ					=> SYSTEM_CLOCK_FREQ		-- 200 MHz
 			)
 			port map (
 				Clock 							=> System_Clock,
