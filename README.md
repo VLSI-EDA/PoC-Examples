@@ -124,7 +124,7 @@ on your local system.
 ```PowerShell
 cd <ExamplesRoot>
 cd lib\PoC\
-.\poc.ps1 --configure
+.\poc.ps1 configure
 ```
 
 #### 4.2 Creating PoC's my_project File
