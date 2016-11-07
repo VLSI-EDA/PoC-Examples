@@ -112,11 +112,13 @@ begin  -- architecture rtl
 																				 -BYTE_ADDR_BITS; 
 
 		signal mem_rdy	 : std_logic;
-		signal mem_rstb	 : std_logic;
 		signal mem_req	 : std_logic;
 		signal mem_write : std_logic;
 		signal mem_addr	 : unsigned(WORD_ADDR_BITS-1 downto 0);
-		
+		signal mem_wdata : std_logic_vector(127 downto 0);
+		signal mem_rstb	 : std_logic;
+		signal mem_rdata : std_logic_vector(127 downto 0);
+
   begin  -- block MemoryTester0
 		fsm: entity work.memtest_fsm
 			generic map (
@@ -127,31 +129,39 @@ begin  -- architecture rtl
 				rst				=> c3_rst0,
 				mem_rdy		=> mem_rdy,
 				mem_rstb	=> mem_rstb,
-				mem_rdata => c3_p0_rd_data,
+				mem_rdata => mem_rdata,
 				mem_req		=> mem_req,
 				mem_write => mem_write,
 				mem_addr	=> mem_addr,
-				mem_wdata => c3_p0_wr_data,
+				mem_wdata => mem_wdata,
 				status		=> memtest0_status);
 
-		-- command & address
-		mem_rdy <= c3_calib_done and (not c3_p0_cmd_full) and (not c3_p0_wr_full);
-
-		c3_p0_cmd_en		<= mem_rdy and mem_req;
-		c3_p0_wr_en			<= mem_rdy and mem_req and mem_write;
-		c3_p0_cmd_instr <= "00" & (not mem_write);	-- with-out auto precharge
-		c3_p0_cmd_bl		<= "000000";								-- 1 word of 128-bit
-		c3_p0_wr_mask   <= (others => '0'); 				-- all bytes
-		
-		process (mem_addr) is
-		begin  -- process
-			c3_p0_cmd_byte_addr <= (others => '0');
-			c3_p0_cmd_byte_addr(WORD_ADDR_BITS+BYTE_ADDR_BITS-1 downto BYTE_ADDR_BITS) <= std_logic_vector(mem_addr);
-		end process;
-
-		-- read strobe
-		mem_rstb    <= not c3_p0_rd_empty;
-		c3_p0_rd_en <= mem_rstb;
+		adapter: entity poc.ddr3_mem2mig_adapter_Spartan6
+			generic map (
+				D_BITS     => 128,
+				MEM_A_BITS => WORD_ADDR_BITS,
+				APP_A_BITS => c3_p0_cmd_byte_addr'length)
+			port map (
+				mem_req           => mem_req,
+				mem_write         => mem_write,
+				mem_addr          => mem_addr,
+				mem_wdata         => mem_wdata,
+				mem_rdy           => mem_rdy,
+				mem_rstb          => mem_rstb,
+				mem_rdata         => mem_rdata,
+				mig_calib_done    => c3_calib_done,
+				mig_cmd_full      => c3_p0_cmd_full,
+				mig_wr_full       => c3_p0_wr_full,
+				mig_rd_empty      => c3_p0_rd_empty,
+				mig_rd_data       => c3_p0_rd_data,
+				mig_cmd_instr     => c3_p0_cmd_instr,
+				mig_cmd_en        => c3_p0_cmd_en,
+				mig_cmd_bl        => c3_p0_cmd_bl,
+				mig_cmd_byte_addr => c3_p0_cmd_byte_addr,
+				mig_wr_data       => c3_p0_wr_data,
+				mig_wr_mask       => c3_p0_wr_mask,
+				mig_wr_en         => c3_p0_wr_en,
+				mig_rd_en         => c3_p0_rd_en);
   end block MemoryTester0;
 	
 	-----------------------------------------------------------------------------
