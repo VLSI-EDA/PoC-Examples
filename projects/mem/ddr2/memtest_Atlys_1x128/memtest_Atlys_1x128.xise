@@ -15,7 +15,7 @@
   <version xil_pn:ise_version="14.7" xil_pn:schema_version="2"/>
 
   <files>
-    <file xil_pn:name="../../../../src/mem/ddr3/memtest_Atlys_1x128.vhdl" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../../../src/mem/ddr2/memtest_Atlys_1x128.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="1"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="7"/>
     </file>
@@ -94,7 +94,7 @@
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
       <library xil_pn:name="poc"/>
     </file>
-    <file xil_pn:name="../../../../lib/PoC/src/mem/ddr3/ddr3_mem2mig_adapter_Spartan6.vhdl" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../../../lib/PoC/src/mem/ddr2/ddr2_mem2mig_adapter_Spartan6.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="68"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="5"/>
       <library xil_pn:name="poc"/>
@@ -217,7 +217,7 @@
     <property xil_pn:name="Ignore User Timing Constraints Map" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Ignore User Timing Constraints Par" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Implementation Top" xil_pn:value="Architecture|memtest_Atlys_1x128|rtl" xil_pn:valueState="non-default"/>
-    <property xil_pn:name="Implementation Top File" xil_pn:value="../../../../../src/mem/ddr3/memtest_Atlys_1x128.vhdl" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="Implementation Top File" xil_pn:value="../../../../../src/mem/ddr2/memtest_Atlys_1x128.vhdl" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Implementation Top Instance Path" xil_pn:value="/memtest_Atlys_1x128" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Include 'uselib Directive in Verilog File" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Include SIMPRIM Models in Verilog File" xil_pn:value="false" xil_pn:valueState="default"/>

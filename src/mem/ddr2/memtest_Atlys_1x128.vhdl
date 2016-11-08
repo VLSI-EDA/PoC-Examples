@@ -136,7 +136,7 @@ begin  -- architecture rtl
 				mem_wdata => mem_wdata,
 				status		=> memtest0_status);
 
-		adapter: entity poc.ddr3_mem2mig_adapter_Spartan6
+		adapter: entity poc.ddr2_mem2mig_adapter_Spartan6
 			generic map (
 				D_BITS     => 128,
 				MEM_A_BITS => WORD_ADDR_BITS,
