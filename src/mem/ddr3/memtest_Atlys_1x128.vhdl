@@ -36,7 +36,7 @@ use ieee.numeric_std.all;
 library poc;
 use poc.utils.all;
 
-entity memtest_mig_Atlys_1x128 is
+entity memtest_Atlys_1x128 is
 
   generic (
     C3_SIMULATION	  			: string  := "FALSE");
@@ -64,9 +64,9 @@ entity memtest_mig_Atlys_1x128 is
 		mcb3_dram_ck		 : out	 std_logic;
 		mcb3_dram_ck_n	 : out	 std_logic);
 
-end entity memtest_mig_Atlys_1x128;
+end entity memtest_Atlys_1x128;
 
-architecture rtl of memtest_mig_Atlys_1x128 is
+architecture rtl of memtest_Atlys_1x128 is
 	signal memtest0_status : std_logic_vector(2 downto 0);
 	
 	-- Memory Controller signals

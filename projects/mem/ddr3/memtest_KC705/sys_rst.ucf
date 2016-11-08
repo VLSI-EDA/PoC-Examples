@@ -1,0 +1,17 @@
+# EMACS settings: -*-	tab-width: 2; indent-tabs-mode: t -*-
+# vim: tabstop=2:shiftwidth=2:noexpandtab
+# kate: tab-width 2; replace-tabs off; indent-width 2;
+# ==============================================================================
+
+# Ignore absolute delay from our reset pulse generator
+# to the reset synchronizer of the MIG IP Core.
+# But still limit skew on asynchronous reset of the MIG IP Core.
+# The IP core ensures, that the reset will be released synchronously to the
+# respective clock.
+INST "sys_rst_pulse"                                    TNM="TNM_SYS_RST";
+INST "mig/u_ddr3_infrastructure/rstdiv0_sync_r*"        TNM="TNM_MIG_ASYNC_RST";
+INST "mig/u_ddr3_infrastructure/rst_phaser_ref_sync_r*" TNM="TNM_MIG_ASYNC_RST";
+
+TIMESPEC "TS_MIG_ASYNC_RST" = FROM "TNM_SYS_RST" TO "TNM_MIG_ASYNC_RST" TIG;
+
+NET "sys_rst" MAXSKEW = 1 ns;
