@@ -26,9 +26,11 @@ __pycache__
 !/projects/**/*.ucf
 !/projects/**/*.xcf
 !/projects/**/*.xise
-!/projects/**/*.xpr
 !/projects/**/ise/.gitempty
 !/projects/**/iseconfig/filter.filter
+!/projects/**/*.xpr
+!/projects/**/*.srcs/ip/*/*.xci
+!/projects/**/*.srcs/ip/*/mig*.prj
 !/projects/**/*.sdc
 !/projects/**/*.qpf
 !/projects/**/*.qsf
