@@ -110,6 +110,47 @@ architecture rtl of memtest_s3esk is
   signal rf_put   : std_logic;
   signal rf_din   : std_logic_vector(31 downto 0);
 
+	-- Component declaration in case a netlist is used.
+	component sdram_ctrl_s3esk is
+    generic (
+      CLK_PERIOD : real;
+      BL         : positive);
+    port (
+      clk              : in    std_logic;
+      clk_n            : in    std_logic;
+      clk90            : in    std_logic;
+      clk90_n          : in    std_logic;
+      rst              : in    std_logic;
+      rst90            : in    std_logic;
+      rst180           : in    std_logic;
+      rst270           : in    std_logic;
+      clk_fb90         : in    std_logic;
+      clk_fb90_n       : in    std_logic;
+      rst_fb90         : in    std_logic;
+      rst_fb270        : in    std_logic;
+      user_cmd_valid   : in    std_logic;
+      user_wdata_valid : in    std_logic;
+      user_write       : in    std_logic;
+      user_addr        : in    std_logic_vector(24 downto 0);
+      user_wdata       : in    std_logic_vector(31 downto 0);
+      user_got_cmd     : out   std_logic;
+      user_got_wdata   : out   std_logic;
+      user_rdata       : out   std_logic_vector(31 downto 0);
+      user_rstb        : out   std_logic;
+      sd_ck_p          : out   std_logic;
+      sd_ck_n          : out   std_logic;
+      sd_cke           : out   std_logic;
+      sd_cs            : out   std_logic;
+      sd_ras           : out   std_logic;
+      sd_cas           : out   std_logic;
+      sd_we            : out   std_logic;
+      sd_ba            : out   std_logic_vector(1 downto 0);
+      sd_a             : out   std_logic_vector(12 downto 0);
+      sd_ldqs          : out   std_logic;
+      sd_udqs          : out   std_logic;
+      sd_dq            : inout std_logic_vector(15 downto 0));
+	end component sdram_ctrl_s3esk;
+
 begin  -- rtl
   clockgen: entity work.memtest_s3esk_clockgen
     port map (
@@ -141,7 +182,7 @@ begin  -- rtl
   
 
   -- uses default configuration, see entity declaration
-  mem_ctrl: entity poc.sdram_ctrl_s3esk
+  mem_ctrl: sdram_ctrl_s3esk
     generic map (
       CLK_PERIOD  => 10.0,
       BL          => 2)

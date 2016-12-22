@@ -222,8 +222,8 @@ NET  "clk_in" CLOCK_DEDICATED_ROUTE = false;
 #
 NET "mem_ctrl/phy/rden1_r" MAXDELAY = 0.5 ns;
 
-INST "mem_ctrl/phy/dqs_obuf[*].tff" IOB = TRUE;
-INST "mem_ctrl/phy/dq_obuf[*].tff"  IOB = TRUE;
+INST "mem_ctrl/phy/dqs_out[*].tff" IOB = TRUE;
+INST "mem_ctrl/phy/dq_out[*].tff"  IOB = TRUE;
 
 ##############################################################################
 ### Misc
