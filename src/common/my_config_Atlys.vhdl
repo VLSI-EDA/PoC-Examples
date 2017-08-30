@@ -31,13 +31,13 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 -- =============================================================================
-
-
+--
+--
 package my_config is
-  -- Change these lines to setup configuration.
-  constant MY_BOARD		: string	:= "Atlys";		-- Digilent Atlys - Xilinx Spartan-6: XC6SLX45
-  constant MY_DEVICE	: string	:= "None";		-- infer from MY_BOARD
+	-- Change these lines to setup configuration.
+  constant MY_BOARD        : string   := "Atlys";     -- Digilent Atlys - Xilinx Spartan-6: XC6SLX45
+  constant MY_DEVICE       : string   := "None";      -- infer from MY_BOARD
 
 	-- For internal use only
- 	constant MY_VERBOSE	: boolean	:= FALSE;
+ 	constant MY_VERBOSE      : boolean  := FALSE;
 end package;
