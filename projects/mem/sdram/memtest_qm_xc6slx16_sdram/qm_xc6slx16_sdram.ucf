@@ -1,0 +1,115 @@
+#####################################################
+### QMTECH XC6SLX16 SDRAM BOARD CONSTRAINTS FILE
+#####################################################
+
+# === Common ===
+TIMEGRP "TGRP_rising_ffs"  = RISING  FFS;
+TIMEGRP "TGRP_falling_ffs" = FALLING FFS;
+
+# ==== Pushbuttons (SW) =====
+NET "sw3_n" LOC = R7    | IOSTANDARD = LVTTL;
+
+# ==== Clock inputs (CLK) ====
+NET "clk_in" LOC = A10   | IOSTANDARD = LVTTL;
+# Define clock period for 50 MHz oscillator (40%/60% duty-cycle)
+NET "clk_in" TNM_NET = "TGRP_clk_in";
+TIMESPEC "TS_clk_in" = PERIOD "TGRP_clk_in" 20 ns HIGH 40 %;
+
+NET "clk_sys"     TNM = "TGRP_sys";
+NET "clk_mem"     TNM = "TGRP_mem";
+
+# Cross-clock paths.
+# Maximum delay is period of fastest clock.
+# clk_sys and clk_mem are related, but automatic constraints do not work.
+# clk_sys and clk_memfb90_n are not related.
+
+TIMESPEC "TS_cross1" = FROM "TGRP_sys"       TO "TGRP_mem"       10 ns;
+TIMESPEC "TS_cross2" = FROM "TGRP_mem"       TO "TGRP_sys"       10 ns;
+
+# ==== Discrete LEDs (LED) ====
+NET "led1_n" LOC = T9    | IOSTANDARD = LVTTL;
+NET "led3_n" LOC = R9    | IOSTANDARD = LVTTL;
+
+# ==== SDRAM (SD) ==== 
+NET "sd_a[0]"     LOC = L4    | IOSTANDARD = LVTTL;
+NET "sd_a[1]"     LOC = M3    | IOSTANDARD = LVTTL;
+NET "sd_a[2]"     LOC = M4    | IOSTANDARD = LVTTL;
+NET "sd_a[3]"     LOC = N3    | IOSTANDARD = LVTTL;
+NET "sd_a[4]"     LOC = R2    | IOSTANDARD = LVTTL;
+NET "sd_a[5]"     LOC = R1    | IOSTANDARD = LVTTL;
+NET "sd_a[6]"     LOC = P2    | IOSTANDARD = LVTTL;
+NET "sd_a[7]"     LOC = P1    | IOSTANDARD = LVTTL;
+NET "sd_a[8]"     LOC = N1    | IOSTANDARD = LVTTL;
+NET "sd_a[9]"     LOC = M1    | IOSTANDARD = LVTTL;
+NET "sd_a[10]"    LOC = L3    | IOSTANDARD = LVTTL;
+NET "sd_a[11]"    LOC = L1    | IOSTANDARD = LVTTL;
+NET "sd_a[12]"    LOC = K1    | IOSTANDARD = LVTTL;
+NET "sd_dq[0]"    LOC = A3    | IOSTANDARD = LVTTL;
+NET "sd_dq[1]"    LOC = A2    | IOSTANDARD = LVTTL;
+NET "sd_dq[2]"    LOC = B3    | IOSTANDARD = LVTTL;
+NET "sd_dq[3]"    LOC = B2    | IOSTANDARD = LVTTL;
+NET "sd_dq[4]"    LOC = C3    | IOSTANDARD = LVTTL;
+NET "sd_dq[5]"    LOC = C2    | IOSTANDARD = LVTTL;
+NET "sd_dq[6]"    LOC = D3    | IOSTANDARD = LVTTL;
+NET "sd_dq[7]"    LOC = E3    | IOSTANDARD = LVTTL;
+NET "sd_dq[8]"    LOC = G1    | IOSTANDARD = LVTTL;
+NET "sd_dq[9]"    LOC = F1    | IOSTANDARD = LVTTL;
+NET "sd_dq[10]"   LOC = F2    | IOSTANDARD = LVTTL;
+NET "sd_dq[11]"   LOC = E1    | IOSTANDARD = LVTTL;
+NET "sd_dq[12]"   LOC = E2    | IOSTANDARD = LVTTL;
+NET "sd_dq[13]"   LOC = D1    | IOSTANDARD = LVTTL;
+NET "sd_dq[14]"   LOC = C1    | IOSTANDARD = LVTTL;
+NET "sd_dq[15]"   LOC = B1    | IOSTANDARD = LVTTL;
+NET "sd_ba[0]"    LOC = K3    | IOSTANDARD = LVTTL;
+NET "sd_ba[1]"    LOC = K2    | IOSTANDARD = LVTTL;
+NET "sd_ck"       LOC = H1    | IOSTANDARD = LVTTL;
+NET "sd_cke"      LOC = J1    | IOSTANDARD = LVTTL;
+NET "sd_ldm"      LOC = F3    | IOSTANDARD = LVTTL;
+NET "sd_udm"      LOC = H2    | IOSTANDARD = LVTTL;
+NET "sd_cas"      LOC = H3    | IOSTANDARD = LVTTL;
+NET "sd_ras"      LOC = J4    | IOSTANDARD = LVTTL;
+NET "sd_we"       LOC = G3    | IOSTANDARD = LVTTL;
+NET "sd_cs"       LOC = J3    | IOSTANDARD = LVTTL;
+
+NET "sd_ck"    TNM = "TGRP_sd_clk" | SLEW = FAST;
+
+# Timing constraint such that sd_ck is in-phase with clk_in @ 100 MHz
+# This timing constraint must be met as close as possible => clock to output slack ~= 0.0
+# The VALID should ensure this slack.
+TIMEGRP "TGRP_sd_clk" OFFSET = OUT 10 ns VALID 5.5 ns AFTER "clk_in" TIMEGRP "TGRP_rising_ffs";
+
+NET "sd_a[*]"  TNM = "TGRP_sd_cmd" | SLEW = FAST;
+NET "sd_ba[*]" TNM = "TGRP_sd_cmd" | SLEW = FAST;
+NET "sd_cke"   TNM = "TGRP_sd_cmd" | SLEW = FAST;
+NET "sd_cs"    TNM = "TGRP_sd_cmd" | SLEW = FAST;
+NET "sd_ras"   TNM = "TGRP_sd_cmd" | SLEW = FAST;
+NET "sd_cas"   TNM = "TGRP_sd_cmd" | SLEW = FAST;
+NET "sd_we"    TNM = "TGRP_sd_cmd" | SLEW = FAST;
+
+# Timing constraints such that FFs must be placed in IOBs.
+TIMEGRP "TGRP_sd_cmd" OFFSET = OUT 8.5 ns AFTER "clk_in"; # setup time is 1.5 ns
+
+NET "sd_dq[*]" TNM = "TGRP_sd_dq" | SLEW = FAST;
+NET "sd_dq[*]" IFD_DELAY_VALUE = 0;
+
+# Timing constraints to check clock setup.
+TIMEGRP "TGRP_sd_dq" OFFSET = OUT  8.5 ns AFTER "clk_in"; # setup time is 1.5 ns
+
+# Input timing when sd_ck is in-phase with clk_in
+# Note: due to bug in ISE timing analyzer, OFFSET OUT AFTER VALID constraint do not work as expected
+# @MEM: t_AC(CL=2) = 6.0 ns => @FPGA: t_S = T - t_AC = 10.0 ns - 6.0 ns = 4.0 ns
+# @MEM: t_OH       = 3.0 ns => @FPGA: t_valid = t_S + t_H = t_S + t_OH =  7.0 ns
+TIMEGRP "TGRP_sd_dq" OFFSET = IN 4.0 ns VALID 7.0 ns BEFORE "clk_in";
+
+
+##############################################################################
+### Constraints for clockgen
+##############################################################################
+INST "clockgen/pll"   LOC = "PLL_ADV_X0Y1" ;
+
+
+##############################################################################
+### Misc
+##############################################################################
+OFFSET = IN  20 ns VALID 20 ns BEFORE "clk_in";
+OFFSET = OUT 20 ns AFTER  "clk_in";
