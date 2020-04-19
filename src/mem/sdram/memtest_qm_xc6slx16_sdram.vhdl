@@ -62,6 +62,9 @@ end memtest_qm_xc6slx16_sdram;
 
 architecture rtl of memtest_qm_xc6slx16_sdram is
 
+	constant A_BITS : positive := 24;
+	constant D_BITS : positive := 16;
+  
   signal clk_sys       : std_logic;
   signal clk_mem       : std_logic;
   signal clk_memout    : std_logic;
@@ -72,32 +75,26 @@ architecture rtl of memtest_qm_xc6slx16_sdram is
 
   signal clk_tb : std_logic;
   signal rst_tb : std_logic;
-  
-  signal cf_put   : std_logic;
-  signal cf_full  : std_logic;
-  signal cf_din   : std_logic_vector(24 downto 0);
-  signal cf_dout  : std_logic_vector(24 downto 0);
-  signal cf_valid : std_logic;
-  signal cf_got   : std_logic;
 
-  signal wf_put   : std_logic;
-  signal wf_full  : std_logic;
-  signal wf_din   : std_logic_vector(15 downto 0);
-  signal wf_dout  : std_logic_vector(15 downto 0);
-  signal wf_valid : std_logic;
-  signal wf_got   : std_logic;
+  signal user_cmd_valid   : std_logic;
+  signal user_wdata_valid : std_logic;
+  signal user_write       : std_logic;
+  signal user_addr        : std_logic_vector(A_BITS-1 downto 0);
+  signal user_wdata       : std_logic_vector(D_BITS-1 downto 0);
+  signal user_wmask       : std_logic_vector(D_BITS/8-1 downto 0) := (others => '0');
+  signal user_got_cmd     : std_logic;
+  signal user_got_wdata   : std_logic;
+  signal user_rdata       : std_logic_vector(D_BITS-1 downto 0);
+  signal user_rstb        : std_logic;
 
   signal mem_rdy    : std_logic;
   signal mem_rstb   : std_logic;
-  signal mem_rdata  : std_logic_vector(15 downto 0);
+  signal mem_rdata  : std_logic_vector(D_BITS-1 downto 0);
   signal mem_req    : std_logic;
   signal mem_write  : std_logic;
-  signal mem_addr   : unsigned(23 downto 0);
-  signal mem_wdata  : std_logic_vector(15 downto 0);
+  signal mem_addr   : unsigned(A_BITS-1 downto 0);
+  signal mem_wdata  : std_logic_vector(D_BITS-1 downto 0);
   signal fsm_status : std_logic_vector(2 downto 0);
-  
-  signal rf_put   : std_logic;
-  signal rf_din   : std_logic_vector(15 downto 0);
 
 begin  -- rtl
 
@@ -132,15 +129,16 @@ begin  -- rtl
       clkout           => clk_memout,
       clkout_n         => clk_memout_n,
       rst              => rst_mem,
-      user_cmd_valid   => cf_valid,
-      user_wdata_valid => wf_valid,
-      user_write       => cf_dout(cf_dout'left),
-      user_addr        => cf_dout(cf_dout'left-1 downto 0),
-      user_wdata       => wf_dout,
-      user_got_cmd     => cf_got,
-      user_got_wdata   => wf_got,
-      user_rdata       => rf_din,
-      user_rstb        => rf_put,
+      user_cmd_valid   => user_cmd_valid,
+      user_wdata_valid => user_wdata_valid,
+      user_write       => user_write,
+      user_addr        => user_addr,
+      user_wdata       => user_wdata,
+      user_wmask       => user_wmask,
+      user_got_cmd     => user_got_cmd,
+      user_got_wdata   => user_got_wdata,
+      user_rdata       => user_rdata,
+      user_rstb        => user_rstb,
       sd_ck            => sd_ck,
       sd_cke           => sd_cke,
       sd_cs            => sd_cs,
@@ -153,63 +151,38 @@ begin  -- rtl
 			sd_dqm(1)        => sd_udm,
       sd_dq            => sd_dq);
 
-  cmd_fifo: fifo_ic_got
+	mem2ctrl_adapter: entity PoC.sdram_mem2ctrl_adapter
     generic map (
-      DATA_REG  => true,
-      D_BITS    => 25,
-      MIN_DEPTH => 8)
+      A_BITS => A_BITS,
+      D_BITS => D_BITS)
     port map (
-      clk_wr => clk_tb,
-      rst_wr => rst_tb,
-      put    => cf_put,
-      din    => cf_din,
-      full   => cf_full,
-      clk_rd => clk_mem,
-      rst_rd => rst_mem,
-      got    => cf_got,
-      valid  => cf_valid,
-      dout   => cf_dout);
-
-  wr_fifo: fifo_ic_got
-    generic map (
-      DATA_REG  => true,
-      D_BITS    => 16,
-      MIN_DEPTH => 8)
-    port map (
-      clk_wr => clk_tb,
-      rst_wr => rst_tb,
-      put    => wf_put,
-      din    => wf_din,
-      full   => wf_full,
-      clk_rd => clk_mem,
-      rst_rd => rst_mem,
-      got    => wf_got,
-      valid  => wf_valid,
-      dout   => wf_dout);
-
-  -- The size fo this FIFO depends on the latency between write and read
-  -- clock domain
-  rd_fifo: fifo_ic_got
-    generic map (
-      DATA_REG  => true,
-      D_BITS    => 16,
-      MIN_DEPTH => 8)
-    port map (
-      clk_wr => clk_mem,
-      rst_wr => rst_mem,
-      put    => rf_put,
-      din    => rf_din,
-      full   => open,                   -- can't stall
-      clk_rd => clk_tb,
-      rst_rd => rst_tb,
-      got    => mem_rstb,
-      valid  => mem_rstb,
-      dout   => mem_rdata);
-
+      clk_sys          => clk_tb,
+      clk_ctrl         => clk_mem,
+      rst_sys          => rst_tb,
+      rst_ctrl         => rst_mem,
+      mem_req          => mem_req,
+      mem_write        => mem_write,
+      mem_addr         => mem_addr,
+      mem_wdata        => mem_wdata,
+      --mem_wmask        => mem_wmask,
+      mem_rdy          => mem_rdy,
+      mem_rstb         => mem_rstb,
+      mem_rdata        => mem_rdata,
+      user_cmd_valid   => user_cmd_valid,
+      user_wdata_valid => user_wdata_valid,
+      user_write       => user_write,
+      user_addr        => user_addr,
+      user_wdata       => user_wdata,
+      user_wmask       => user_wmask,
+      user_got_cmd     => user_got_cmd,
+      user_got_wdata   => user_got_wdata,
+      user_rdata       => user_rdata,
+      user_rstb        => user_rstb);
+	
   fsm: entity work.memtest_fsm
     generic map (
-      A_BITS => 24,
-      D_BITS => 16)
+      A_BITS => A_BITS,
+      D_BITS => D_BITS)
     port map (
       clk       => clk_tb,
       rst       => rst_tb,
@@ -221,16 +194,6 @@ begin  -- rtl
       mem_addr  => mem_addr,
       mem_wdata => mem_wdata,
       status    => fsm_status);
-
-  -- Signal mem_ctrl ready only if both FIFOs are not full.
-  mem_rdy <= cf_full nor wf_full;
-
-  -- Word aligned access to memory.
-  -- Parallel "put" to both FIFOs.
-  cf_put <= mem_req and mem_rdy;
-  wf_put <= mem_req and mem_write and mem_rdy;
-  cf_din <= mem_write & std_logic_vector(mem_addr);
-  wf_din <= mem_wdata;
 
   -----------------------------------------------------------------------------
   -- Outputs
