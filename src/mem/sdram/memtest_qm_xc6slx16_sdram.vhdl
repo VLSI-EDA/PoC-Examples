@@ -149,11 +149,10 @@ begin  -- rtl
       sd_we            => sd_we,
       sd_ba            => sd_ba,
       sd_a             => sd_a,
+			sd_dqm(0)        => sd_ldm,
+			sd_dqm(1)        => sd_udm,
       sd_dq            => sd_dq);
 
-  sd_ldm <= '0';
-  sd_udm <= '0';
-  
   cmd_fifo: fifo_ic_got
     generic map (
       DATA_REG  => true,
