@@ -36,6 +36,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 library poc;
+use poc.utils.all;
 use poc.fifo.all;
 
 entity memtest_qm_xc6slx16_sdram is
@@ -62,9 +63,13 @@ end memtest_qm_xc6slx16_sdram;
 
 architecture rtl of memtest_qm_xc6slx16_sdram is
 
-	constant A_BITS : positive := 24;
-	constant D_BITS : positive := 16;
-  
+	-- 32 MiB
+  constant CTRL_A_BITS : positive := 24;
+  constant CTRL_D_BITS : positive := 16;
+  constant RATIO       : positive := 8;  -- burst length: 1, 2, 4 or 8
+  constant MEM_A_BITS  : positive := CTRL_A_BITS-log2ceil(RATIO);
+  constant MEM_D_BITS  : positive := CTRL_D_BITS*RATIO;
+	
   signal clk_sys       : std_logic;
   signal clk_mem       : std_logic;
   signal clk_memout    : std_logic;
@@ -79,21 +84,21 @@ architecture rtl of memtest_qm_xc6slx16_sdram is
   signal user_cmd_valid   : std_logic;
   signal user_wdata_valid : std_logic;
   signal user_write       : std_logic;
-  signal user_addr        : std_logic_vector(A_BITS-1 downto 0);
-  signal user_wdata       : std_logic_vector(D_BITS-1 downto 0);
-  signal user_wmask       : std_logic_vector(D_BITS/8-1 downto 0) := (others => '0');
+  signal user_addr        : std_logic_vector(CTRL_A_BITS-1 downto 0);
+  signal user_wdata       : std_logic_vector(CTRL_D_BITS-1 downto 0);
+  signal user_wmask       : std_logic_vector(CTRL_D_BITS/8-1 downto 0) := (others => '0');
   signal user_got_cmd     : std_logic;
   signal user_got_wdata   : std_logic;
-  signal user_rdata       : std_logic_vector(D_BITS-1 downto 0);
+  signal user_rdata       : std_logic_vector(CTRL_D_BITS-1 downto 0);
   signal user_rstb        : std_logic;
 
   signal mem_rdy    : std_logic;
   signal mem_rstb   : std_logic;
-  signal mem_rdata  : std_logic_vector(D_BITS-1 downto 0);
+  signal mem_rdata  : std_logic_vector(MEM_D_BITS-1 downto 0);
   signal mem_req    : std_logic;
   signal mem_write  : std_logic;
-  signal mem_addr   : unsigned(A_BITS-1 downto 0);
-  signal mem_wdata  : std_logic_vector(D_BITS-1 downto 0);
+  signal mem_addr   : unsigned(MEM_A_BITS-1 downto 0);
+  signal mem_wdata  : std_logic_vector(MEM_D_BITS-1 downto 0);
   signal fsm_status : std_logic_vector(2 downto 0);
 
 begin  -- rtl
@@ -123,7 +128,7 @@ begin  -- rtl
     generic map (
       CLK_PERIOD  => 10.0, -- 100 MHz, must match configuration of clockgen
       CL          => 2,
-      BL          => 1)
+      BL          => RATIO) -- BL = RATIO for single data-rate SDRAM
     port map (
       clk              => clk_mem,
       clkout           => clk_memout,
@@ -153,8 +158,9 @@ begin  -- rtl
 
 	mem2ctrl_adapter: entity PoC.sdram_mem2ctrl_adapter
     generic map (
-      A_BITS => A_BITS,
-      D_BITS => D_BITS)
+      MEM_A_BITS => MEM_A_BITS,
+      MEM_D_BITS => MEM_D_BITS,
+			RATIO      => RATIO)
     port map (
       clk_sys          => clk_tb,
       clk_ctrl         => clk_mem,
@@ -181,8 +187,8 @@ begin  -- rtl
 	
   fsm: entity work.memtest_fsm
     generic map (
-      A_BITS => A_BITS,
-      D_BITS => D_BITS)
+      A_BITS => MEM_A_BITS,
+      D_BITS => MEM_D_BITS)
     port map (
       clk       => clk_tb,
       rst       => rst_tb,
@@ -194,6 +200,8 @@ begin  -- rtl
       mem_addr  => mem_addr,
       mem_wdata => mem_wdata,
       status    => fsm_status);
+
+	--mem_addr(mem_addr'left downto 3) <= (others => '0');
 
   -----------------------------------------------------------------------------
   -- Outputs
