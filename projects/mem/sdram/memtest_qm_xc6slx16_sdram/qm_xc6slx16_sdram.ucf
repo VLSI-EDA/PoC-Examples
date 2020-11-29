@@ -91,8 +91,9 @@ NET "sd_we"    TNM = "TGRP_sd_cmd" | SLEW = FAST;
 # Timing constraints such that FFs must be placed in IOBs.
 TIMEGRP "TGRP_sd_cmd" OFFSET = OUT 7.5 ns AFTER "clk_in"; # setup time is 1.5 ns + 1 ns extra for TGRP_sd_clk output slack
 
-NET "sd_dq[*]" TNM = "TGRP_sd_dq" | SLEW = FAST;
-NET "sd_dq[*]" IFD_DELAY_VALUE = 0;
+NET "sd_dq[*]" TNM = "TGRP_sd_dq" | SLEW = FAST | IFD_DELAY_VALUE = 0;
+NET "sd_ldm"   TNM = "TGRP_sd_dq" | SLEW = FAST;
+NET "sd_udm"   TNM = "TGRP_sd_dq" | SLEW = FAST;
 
 # Timing constraints to check clock setup.
 TIMEGRP "TGRP_sd_dq" OFFSET = OUT  7.5 ns AFTER "clk_in"; # setup time is 1.5 ns + 1 ns extra for TGRP_sd_clk output slack
