@@ -76,6 +76,8 @@ NET "sd_ck"    TNM = "TGRP_sd_clk" | SLEW = FAST;
 # Timing constraint such that sd_ck is in-phase with clk_in @ 100 MHz
 # This timing constraint must be met as close as possible => clock to output slack ~= 0.0
 # The VALID should ensure this slack.
+# NOTE: A positive output slack means, that the clock is arriving earlier at the SDRAM compared 
+# to the FPGA input clock (clk_in). This effectivly increases the setup time at the SDRAM. This is accounted below.
 TIMEGRP "TGRP_sd_clk" OFFSET = OUT 10 ns VALID 5.5 ns AFTER "clk_in" TIMEGRP "TGRP_rising_ffs";
 
 NET "sd_a[*]"  TNM = "TGRP_sd_cmd" | SLEW = FAST;
@@ -87,13 +89,13 @@ NET "sd_cas"   TNM = "TGRP_sd_cmd" | SLEW = FAST;
 NET "sd_we"    TNM = "TGRP_sd_cmd" | SLEW = FAST;
 
 # Timing constraints such that FFs must be placed in IOBs.
-TIMEGRP "TGRP_sd_cmd" OFFSET = OUT 8.5 ns AFTER "clk_in"; # setup time is 1.5 ns
+TIMEGRP "TGRP_sd_cmd" OFFSET = OUT 7.5 ns AFTER "clk_in"; # setup time is 1.5 ns + 1 ns extra for TGRP_sd_clk output slack
 
 NET "sd_dq[*]" TNM = "TGRP_sd_dq" | SLEW = FAST;
 NET "sd_dq[*]" IFD_DELAY_VALUE = 0;
 
 # Timing constraints to check clock setup.
-TIMEGRP "TGRP_sd_dq" OFFSET = OUT  8.5 ns AFTER "clk_in"; # setup time is 1.5 ns
+TIMEGRP "TGRP_sd_dq" OFFSET = OUT  7.5 ns AFTER "clk_in"; # setup time is 1.5 ns + 1 ns extra for TGRP_sd_clk output slack
 
 # Input timing when sd_ck is in-phase with clk_in
 # Note: due to bug in ISE timing analyzer, OFFSET OUT AFTER VALID constraint do not work as expected
