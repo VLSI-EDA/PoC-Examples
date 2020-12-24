@@ -42,47 +42,47 @@ use			PoC.physical.all;
 
 entity top_FanControl_VC707 is
   port (
-    VC707_SystemClock_200MHz_p	: in	STD_LOGIC;
-    VC707_SystemClock_200MHz_n	: in	STD_LOGIC;
+    VC707_SystemClock_200MHz_p  : in	STD_LOGIC;
+    VC707_SystemClock_200MHz_n  : in	STD_LOGIC;
 
-    VC707_FanControl_PWM				: out STD_LOGIC;
-    VC707_FanControl_Tacho			: in  STD_LOGIC
+    VC707_FanControl_PWM        : out STD_LOGIC;
+    VC707_FanControl_Tacho      : in  STD_LOGIC
   );
-end;
+end entity;
 
 
 architecture top of top_FanControl_VC707 is
-	attribute KEEP											: BOOLEAN;
+	attribute KEEP                      : BOOLEAN;
 
 	-- ===========================================================================
 	-- configurations
 	-- ===========================================================================
 	-- common configuration
-	constant DEBUG											: BOOLEAN							:= TRUE;
-	constant SYSTEM_CLOCK_FREQ					: FREQ								:= 200 MHz;
+	constant DEBUG                      : BOOLEAN             := TRUE;
+	constant SYSTEM_CLOCK_FREQ          : FREQ                := 200 MHz;
 
 	-- ===========================================================================
 	-- signal declarations
 	-- ===========================================================================
-	signal System_Clock_ibufgds					: STD_LOGIC;
-	signal System_Clock									: STD_LOGIC;
-	signal System_Reset									: STD_LOGIC;
+	signal System_Clock_ibufgds         : STD_LOGIC;
+	signal System_Clock                 : STD_LOGIC;
+	signal System_Reset                 : STD_LOGIC;
 
 begin
 	-- ===========================================================================
 	-- assert statements
 	-- ===========================================================================
-	assert FALSE report "FanControl configuration:"													severity NOTE;
-	assert FALSE report "  SYSTEM_CLOCK_FREQ: " & to_string(SYSTEM_CLOCK_FREQ, 3)	severity note;
+	assert FALSE report "FanControl configuration:"                               severity NOTE;
+	assert FALSE report "  SYSTEM_CLOCK_FREQ: " & to_string(SYSTEM_CLOCK_FREQ, 3) severity note;
 
 	-- ===========================================================================
 	-- Input/output buffers
 	-- ===========================================================================
 	IBUFGDS_SystemClock : IBUFGDS
 		port map (
-			I			=> VC707_SystemClock_200MHz_p,
-			IB		=> VC707_SystemClock_200MHz_n,
-			O			=> System_Clock_ibufgds
+			I     => VC707_SystemClock_200MHz_p,
+			IB    => VC707_SystemClock_200MHz_n,
+			O     => System_Clock_ibufgds
 		);
 
 	BUFG_SystemClock : BUFG
@@ -90,45 +90,44 @@ begin
 			I => System_Clock_ibufgds,
 			O => System_Clock);
 	
-		System_Reset		<= '0';
+		System_Reset    <= '0';
 
 	-- ===========================================================================
 	-- Fan Control
 	-- ===========================================================================
 	blkFanControl : block
-		signal FanControl_PWM						: STD_LOGIC;
-		signal FanControl_PWM_d					: STD_LOGIC				:= '0';
+		signal FanControl_PWM           : STD_LOGIC;
+		signal FanControl_PWM_d         : STD_LOGIC        := '0';
 		
-		signal FanControl_Tacho_async		: STD_LOGIC;
-		signal FanControl_Tacho_sync		: STD_LOGIC;
+		signal FanControl_Tacho_async   : STD_LOGIC;
+		signal FanControl_Tacho_sync    : STD_LOGIC;
 		
 	begin
-		FanControl_Tacho_async	<= VC707_FanControl_Tacho;
+		FanControl_Tacho_async  <= VC707_FanControl_Tacho;
 	
 		sync : entity PoC.sync_Bits
 			port map (
-				Clock				=> System_Clock,						-- Clock to be synchronized to
-				Input(0)		=> FanControl_Tacho_async,	-- Data to be synchronized
-				Output(0)		=> FanControl_Tacho_sync		-- synchronised data
+				Clock       => System_Clock,            -- Clock to be synchronized to
+				Input(0)    => FanControl_Tacho_async,  -- Data to be synchronized
+				Output(0)   => FanControl_Tacho_sync    -- synchronized data
 			);
 	
 		Fan : entity PoC.io_FanControl
 			generic map (
-				CLOCK_FREQ					=> SYSTEM_CLOCK_FREQ		-- 200 MHz
+				CLOCK_FREQ          => SYSTEM_CLOCK_FREQ    -- 200 MHz
 			)
 			port map (
-				Clock 							=> System_Clock,
-				Reset 							=> System_Reset,
+				Clock               => System_Clock,
+				Reset               => System_Reset,
 					
-				Fan_PWM 						=> FanControl_PWM,
-				Fan_Tacho						=> FanControl_Tacho_sync,
+				Fan_PWM             => FanControl_PWM,
+				Fan_Tacho           => FanControl_Tacho_sync,
 				
-				TachoFrequency			=> open
+				TachoFrequency      => open
 			);
 		
 		-- IOB-FF
-		FanControl_PWM_d				<= FanControl_PWM when rising_edge(System_Clock);
-		VC707_FanControl_PWM		<= FanControl_PWM_d;
+		FanControl_PWM_d        <= FanControl_PWM when rising_edge(System_Clock);
+		VC707_FanControl_PWM    <= FanControl_PWM_d;
 	end block;
-
-end;
+end architecture;

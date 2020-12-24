@@ -1,7 +1,6 @@
 -- EMACS settings: -*-  tab-width: 2; indent-tabs-mode: t -*-
 -- vim: tabstop=2:shiftwidth=2:noexpandtab
 -- kate: tab-width 2; replace-tabs off; indent-width 2;
--- 
 -- =============================================================================
 -- Authors:         Thomas B. Preusser
 --                  Martin Zabel
@@ -11,8 +10,8 @@
 -- 
 -- Description:
 -- ------------------------------------
---		This file was created from template <PoCRoot>/src/common/my_config.template.vhdl.
---		
+--  Configuration file for a Xilinx VC707 board.
+--
 --
 -- License:
 -- =============================================================================
@@ -31,20 +30,13 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 -- =============================================================================
-
-library PoC;
-
-
+--
+--
 package my_config is
-  -- Change these lines to setup configuration.
-  constant MY_BOARD		: string := "VC707";		-- VC707 - Xilinx Virtex 7 reference design board: XC7V485T
-  constant MY_DEVICE	: string := "None";			-- infer from MY_BOARD
+	-- Change these lines to setup configuration.
+  constant MY_BOARD        : string   := "VC707";     -- VC707 - Xilinx Virtex 7 reference design board: XC7V485T
+  constant MY_DEVICE       : string   := "None";      -- infer from MY_BOARD
 	
 	-- 
-  constant MY_VERBOSE	: boolean	:= false;			-- activate detailed report statements in functions and procedures
-end;
-
-
-package body my_config is
-
-end;
+  constant MY_VERBOSE      : boolean  := FALSE;       -- activate detailed report statements in functions and procedures
+end package;

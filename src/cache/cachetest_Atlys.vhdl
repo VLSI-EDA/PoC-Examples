@@ -79,7 +79,7 @@ end entity cachetest_Atlys;
 architecture rtl of cachetest_Atlys is
 	signal memtest0_status : std_logic_vector(2 downto 0);
 
-  -- Memory Controller signals
+	-- Memory Controller signals
 --  signal c3_sys_rst_i        : std_logic;
 	signal c3_calib_done       : std_logic;
   signal c3_clk0             : std_logic;  -- output from IP core
@@ -112,8 +112,8 @@ architecture rtl of cachetest_Atlys is
 begin  -- architecture rtl
 
 	-----------------------------------------------------------------------------
-  -- MemoryTester for Port 0
-  -----------------------------------------------------------------------------
+	-- MemoryTester for Port 0
+	-----------------------------------------------------------------------------
   MemoryTester0 : block
 		constant MEM_BYTE_ADDR_BITS : natural := 4;  -- 16 Byte / Word
 		constant MEM_WORD_ADDR_BITS : natural :=
@@ -238,7 +238,7 @@ begin  -- architecture rtl
 			mcb3_rzq            => mcb3_rzq,
 			mcb3_dram_udm       => mcb3_dram_udm,
 			c3_sys_clk          => Atlys_SystemClock_100MHz,
-			c3_sys_rst_i        => '0',  			-- active high
+			c3_sys_rst_i        => '0',        -- active high
 			c3_calib_done       => c3_calib_done,
 			c3_clk0             => c3_clk0,
 			c3_rst0             => c3_rst0,
@@ -271,9 +271,9 @@ begin  -- architecture rtl
 			c3_p0_rd_overflow   => c3_p0_rd_overflow,
 			c3_p0_rd_error      => c3_p0_rd_error);
 
-  -----------------------------------------------------------------------------
-  -- Status outputs
-  -----------------------------------------------------------------------------
+	-----------------------------------------------------------------------------
+	-- Status outputs
+	-----------------------------------------------------------------------------
   Atlys_GPIO_LED(7) <= c3_rst0;
   Atlys_GPIO_LED(6) <= '0';
   Atlys_GPIO_LED(5) <= '0';

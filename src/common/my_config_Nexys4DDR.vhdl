@@ -1,22 +1,18 @@
 -- EMACS settings: -*-  tab-width: 2; indent-tabs-mode: t -*-
 -- vim: tabstop=2:shiftwidth=2:noexpandtab
 -- kate: tab-width 2; replace-tabs off; indent-width 2;
--- =============================================================================
--- Authors:         Thomas B. Preusser
---                  Martin Zabel
---                  Patrick Lehmann
---
+-- ============================================================================================================================================================
 -- Package:					Project specific configuration.
 -- 
+-- Authors:         Patrick Lehmann
+--
 -- Description:
 -- ------------------------------------
---  Configuration file for a Xilinx S3SK board.
---		
+--  Configuration file for a Digilent Nexys4 DDR board.
 --
 -- License:
--- =============================================================================
--- Copyright 2007-2015 Technische Universitaet Dresden - Germany,
---										 Chair for VLSI-Design, Diagnostics and Architecture
+-- ============================================================================================================================================================
+-- Copyright 2017-2020 Patrick Lehmann - Boetzingen, Germany
 -- 
 -- Licensed under the Apache License, Version 2.0 (the "License");
 -- you may not use this file except in compliance with the License.
@@ -29,14 +25,13 @@
 -- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
--- =============================================================================
---
+-- ============================================================================================================================================================
 --
 package my_config is
 	-- Change these lines to setup configuration.
-  constant MY_BOARD        : string   := "S3SK";      -- S3SK - Xilinx Spartan-3 Starter Kit reference design board: XC3S200
-  constant MY_DEVICE       : string   := "None";      -- infer from MY_BOARD
-	
-	-- 
-  constant MY_VERBOSE      : boolean  := FALSE;       -- activate detailed report statements in functions and procedures
+  constant MY_BOARD       : string    := "Nexys4DDR"; -- Digilent Nexys4 DDR - Xilinx Artix-7: XC7A100T-1CSG324
+  constant MY_DEVICE      : string    := "None";      -- infer from MY_BOARD
+		
+	-- For internal use only
+ 	constant MY_VERBOSE     : boolean   := FALSE;
 end package;

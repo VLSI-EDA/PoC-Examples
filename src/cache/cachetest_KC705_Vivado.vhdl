@@ -160,7 +160,7 @@ begin	 -- architecture rtl
 	refclk_bufg : bufg
 		port map (
 			I => sysclk_unbuf,
-			O => refclk);  										-- buffered 200 MHz reference clock
+			O => refclk);                      -- buffered 200 MHz reference clock
 
 	-----------------------------------------------------------------------------
 	-- MemoryTester
@@ -318,11 +318,11 @@ begin	 -- architecture rtl
 			app_rd_data_valid   => app_rd_data_valid,
 			app_rdy             => app_rdy,
 			app_wdf_rdy         => app_wdf_rdy,
-			app_sr_req          => '0',  			-- reserved
+			app_sr_req          => '0',        -- reserved
 			app_sr_active       => open,
-			app_ref_req         => '0',  			-- unused
+			app_ref_req         => '0',        -- unused
 			app_ref_ack         => open,
-			app_zq_req          => '0',  			-- unused
+			app_zq_req          => '0',        -- unused
 			app_zq_ack          => open,
 			ui_clk              => ui_clk,
 			ui_clk_sync_rst     => ui_clk_sync_rst,
