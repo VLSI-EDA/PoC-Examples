@@ -1,7 +1,6 @@
 -- EMACS settings: -*-  tab-width: 2; indent-tabs-mode: t -*-
 -- vim: tabstop=2:shiftwidth=2:noexpandtab
 -- kate: tab-width 2; replace-tabs off; indent-width 2;
--- 
 -- =============================================================================
 -- Authors:         Thomas B. Preusser
 --                  Martin Zabel
@@ -11,7 +10,7 @@
 -- 
 -- Description:
 -- ------------------------------------
---		This file was created from template <PoCRoot>/src/common/my_config.template.vhdl.
+--  Configuration file for a Altera DE4 board.
 --		
 --
 -- License:
@@ -36,8 +35,8 @@
 package my_config is
 	-- Change these lines to setup configuration.
   constant MY_BOARD        : string   := "DE4";        -- Stratix IV GX
-  constant MY_DEVICE       : string   := "None";      -- infer from MY_BOARD
+  constant MY_DEVICE       : string   := "None";       -- infer from MY_BOARD
 	
 	-- 
-  constant MY_VERBOSE      : boolean  := false;        -- activate detailed report statements in functions and procedures
+  constant MY_VERBOSE      : boolean  := FALSE;        -- activate detailed report statements in functions and procedures
 end package;

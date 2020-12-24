@@ -1,7 +1,6 @@
 -- EMACS settings: -*-  tab-width: 2; indent-tabs-mode: t -*-
 -- vim: tabstop=2:shiftwidth=2:noexpandtab
 -- kate: tab-width 2; replace-tabs off; indent-width 2;
--- 
 -- =============================================================================
 -- Authors:         Thomas B. Preusser
 --                  Martin Zabel
@@ -11,7 +10,7 @@
 -- 
 -- Description:
 -- ------------------------------------
---		This file was created from template <PoCRoot>/src/common/my_config.template.vhdl.
+--  Configuration file for a Xilinx S3ESK board.
 --		
 --
 -- License:
@@ -35,8 +34,9 @@
 --
 package my_config is
 	-- Change these lines to setup configuration.
-  constant MY_BOARD        : string   := "S3ESK";      -- ML505 - Xilinx Virtex 5 reference design board: XC5VLX50T
+  constant MY_BOARD        : string   := "S3ESK";     -- S3ESK - Xilinx Spartan-3E Starter Kit reference design board: XC3S200
   constant MY_DEVICE       : string   := "None";      -- infer from MY_BOARD
+	
 	-- 
-  constant MY_VERBOSE      : boolean  := false;        -- activate detailed report statements in functions and procedures
+  constant MY_VERBOSE      : boolean  := FALSE;       -- activate detailed report statements in functions and procedures
 end package;

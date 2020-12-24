@@ -1,7 +1,6 @@
 -- EMACS settings: -*-  tab-width: 2; indent-tabs-mode: t -*-
 -- vim: tabstop=2:shiftwidth=2:noexpandtab
 -- kate: tab-width 2; replace-tabs off; indent-width 2;
---
 -- =============================================================================
 -- Authors:         Thomas B. Preusser
 --                  Martin Zabel
@@ -11,7 +10,7 @@
 --
 -- Description:
 -- ------------------------------------
---		This file was created from template <PoCRoot>/src/common/my_config.template.vhdl.
+--  Configuration file for a Xilinx Atlys board.
 --
 --
 -- License:
